@@ -1,0 +1,269 @@
+@font-face {
+    font-family: 'Prompt';
+    src: url('webfonts/Prompt/Prompt-Regular.ttf');
+    font-weight: 400;
+    font-display: swap;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Prompt", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #212529;
+    background-color: var(--background-color);
+    overflow-x: hidden; 
+}
+
+dl, ol, ul {
+    margin-bottom: 0;
+}
+
+audio, canvas, iframe, img, svg, video {
+    vertical-align: middle;
+}
+
+form {
+    position: relative;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.bar {
+    padding: 40px 0;
+}
+
+.notice-input span {
+    font-size: 14px;
+}
+
+.form-control {
+    height: calc(1.5em + 0.75rem + 2px);
+    border-radius: 30px;
+    font-size: 16px;
+    appearance: auto;
+}
+
+.form-control:focus {
+    border-color: var(--background-color-green);
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(218, 77, 77, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(0, 153, 97, 0.25);
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    color: var(--color-dark);
+    font-weight: 700;
+    font-size: 16px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .2rem;
+}
+
+.text-green {
+    color: var(--color-primary-green);
+}
+
+.text-blue {
+    color: var(--color-primary-blue);
+}
+
+.bg-gray {
+    background-color: #f1f2f4;
+}
+
+.bg-blue {
+    background-color: var(--background-color-blue);
+}
+
+.bg-blue-overlay {
+    background-color: #f1f7fc;
+}
+
+.bg-green {
+    background-color: var(--background-color-green);
+}
+
+.bg-blue-45 {
+    padding: 120px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.bg-blue-45:before {
+    content: "";
+    background: var(--background-color-blue);
+    position: absolute;
+    bottom: 60px;
+    top: 50px;
+    left: 0;
+    right: 0;
+    transform: skewY(-2deg);
+    z-index: -1;
+}
+
+.bg-gradient { 
+    background: linear-gradient(-45deg, #690505 0%, #ca2a2a 100%);
+}
+
+section, .section {
+    scroll-margin-top: 72px;
+    overflow: clip;
+}
+
+.section-title {
+    text-align: center;
+}
+
+.section-title h3 {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.section-title h3::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 2px;
+    margin: 10px auto 0;
+}
+
+.section-title h3::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 160px;
+    height: 1px;
+    background: 
+    color-mix(in srgb, #444444, transparent 60%);
+    left: 0;
+    right: 0;
+    bottom: 1px;
+    margin: auto;
+}
+
+.section-title.section-bg-green h3::after {
+    background-color: var(--background-color-green);
+}
+
+.section-title.section-bg-blue h3::after {
+    background-color: var(--background-color-blue);
+}
+
+.section-bg-image {
+    background-image: url('../images/background-section-overlay.jpg');
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/*================ checkbox ================*/
+.form-check-inline {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: start;
+    padding-left: 0;
+    margin-right: .75rem;
+}
+
+.checkbox {
+    --background: var(--color-white);
+    --border: var(--background-color-green);
+    --border-hover: var(--background-color-green);
+    --border-active: var(--background-color-green);
+    --tick: var(--color-white);
+
+    position: relative;
+}
+
+.checkbox input, .checkbox svg {
+    width: 21px;
+    height: 21px;
+    display: block;
+}
+
+.checkbox input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    outline: none;
+    background: var(--background);
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: box-shadow 0.3s;
+    box-shadow: inset 0 0 0 var(--s, 1px) var(--b, var(--border));
+}
+
+.checkbox input:hover {
+    --s: 2px;
+    --b: var(--border-hover);
+}
+
+.checkbox input:checked {
+    --b: var(--border-active);
+}
+
+.checkbox svg {
+    pointer-events: none;
+    fill: none;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: var(--stroke, var(--border-active));
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 21px;
+    height: 21px;
+    transform: scale(var(--scale, 1)) translateZ(0);
+}
+
+.checkbox.path input:checked {
+    --s: 2px;
+    transition-delay: 0.4s;
+}
+
+.checkbox.path input:checked + svg {
+    --a: 16.1 86.12;
+    --o: 102.22;
+}
+
+.checkbox.path svg {
+    stroke-dasharray: var(--a, 86.12);
+    stroke-dashoffset: var(--o, 86.12);
+    transition: stroke-dasharray 0.6s, stroke-dashoffset 0.6s;
+}
+
+.checkbox-label {
+    margin-left: 5px;
+}
+/*================ checkbox ================*/

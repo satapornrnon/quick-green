@@ -1,0 +1,62 @@
+.scrolled .header-area .topbar-area {
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.topbar-area {
+    background-color: var(--background-color-blue);
+    display: flex;
+    height: 40px;
+    justify-content: space-between;    
+    color: white;
+    transition: all 0.5s;
+}
+
+.topbar-area .contact-info {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 100%;
+}
+
+.topbar-area .contact-info a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+}
+
+.topbar-area .contact-info a {
+    margin-left: 20px;
+}
+
+.topbar-area .contact-info i {
+    margin-right: 5px;
+}
+
+.topbar-area .contact-info a:hover,
+.topbar-area .social-media a:hover {
+    color: color-mix(in srgb, white, transparent 25%);
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
+    .topbar-area .contact-info {
+        justify-content: center;
+    }
+    
+    .topbar-area .contact-info a:first-child {
+        margin-left: 0px;
+    }
+    
+    .topbar-area .contact-info a:not(:first-child) {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+}

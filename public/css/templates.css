@@ -1,0 +1,680 @@
+.hero-area {
+    position: relative;
+    background: url('../uploads/slide/hero-slide.webp') no-repeat center center/cover;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-area .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-area .hero-content {
+    position: relative;
+    color: white;
+    text-align: center;
+}   
+
+.hero-area .hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero-area .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}   
+
+.hero-area .hero-content .btn-quotation-solar {
+    padding: 10px 20px;
+    background-color: var(--color-primary-green);
+    color: var(--color-white);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.5s;
+    margin-bottom: 10px;
+}
+
+.hero-area .hero-content .btn-quotation-solar:hover {
+    background-color: color-mix(in srgb, var(--color-primary-green) 90%, white 15%);
+}
+
+.hero-area .hero-content .btn-quotation-inverter {
+    padding: 10px 20px;
+    background-color: var(--color-primary-blue);
+    color: var(--color-white);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.5s;
+    margin-bottom: 10px;
+}
+
+.hero-area .hero-content .btn-quotation-inverter:hover {
+    background-color: color-mix(in srgb, var(--color-primary-blue) 90%, white 15%);
+}
+
+/*============ our philosophy ============*/
+.our-philosophy-area .our-philosophy-card {
+    background-color: var(--background-color-blue);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px var(--background-color-blue);
+    transition: transform 0.3s;
+    text-align: center;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.our-philosophy-area .our-philosophy-card:hover {
+    transform: translateY(-10px);
+}
+
+.our-philosophy-area .our-philosophy-card .icon img {
+    width: 75px;
+    color: var(--color-primary-green);
+    margin-bottom: 20px;
+}
+
+.our-philosophy-area .our-philosophy-card .content h4 {
+    margin-bottom: 10px;
+}
+/*============ our philosophy ============*/
+
+/*============ product ============*/
+.product-area .product-card {
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.product-area .product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-area .product-card .product-link {
+    color: #212529;
+}
+
+.product-area .product-card .images {
+    margin-bottom: 15px;
+}
+
+.product-area .product-card .images img {
+    border-radius: 10px;
+}
+
+.product-area .product-card .content .title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.product-area .product-card .content button {
+    padding: 10px 20px;
+    background-color: var(--color-primary-green);
+    color: var(--color-white);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.5s;
+}
+
+.product-area .product-card .content button:hover {
+    background-color: color-mix(in srgb, var(--color-primary-green) 90%, white 15%);
+}
+/*============ product ============*/
+
+/*============ service ============*/
+.service-area .service-card {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.service-area .service-card .images {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-area .service-card .images img {
+    border-radius: 15px;
+}
+
+.service-area .service-card .content h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--color-primary-green);
+}
+
+.service-area .service-process-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.service-area .service-process-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-area .service-process-card .images {
+    background-color: var(--background-color-green);
+    width: 100px;
+    height: 100px;
+    align-content: center;
+    text-align: center;
+    border-radius: 50px;
+}
+
+.service-area .service-process-card .images img {
+    width: 50px;
+}
+
+.service-area .service-process-card .content {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.service-area .service-process-card .content h5 {
+    font-size: 20px;
+    color: var(--color-primary-green);
+    margin-bottom: 5px;
+}
+
+.service-area .service-process-card .content span {
+    font-size: 15px;
+}
+/*============ service ============*/
+
+/*============ system design ============*/
+.system-design-area .system-design-card {
+    position: relative;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.system-design-area .system-design-card .images {
+    margin-bottom: 15px;
+}
+
+.system-design-area .system-design-card .content .title {
+    font-size: 20px;
+    color: var(--color-primary-green);
+    margin-bottom: 10px;
+}
+/*============ system design ============*/
+
+/*============ request permission ============*/
+.request-permission-area .request-permission-card .content h4 {
+    font-size: 20px;
+    color: var(--color-primary-green);
+    margin-bottom: 10px;
+}
+
+.request-permission-area .request-permission-card .content .images-permission {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.request-permission-area .request-permission-card .content .images-permission img {
+    width: calc(40% - 50px);
+    border-radius: 15px;
+}
+
+.request-permission-area .request-permission-card .images img {
+    border-radius: 15px;
+}
+/*============ request permission ============*/
+
+/*============ our services ============*/
+.our-services-area {
+    text-align: center;
+    background-image: url('../images/background-section-overlay.webp');
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.our-services-area .our-services-filter button {
+    position: relative;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 10px;
+    padding: 8px 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    color: #ffffff;
+    outline: none;
+    background: none;
+}
+
+.our-services-area .our-services-filter button:hover {
+    border-bottom: 2px solid var(--background-color-green);
+    color: var(--color-primary-green);
+}
+
+.our-services-area .our-services-filter button.active {
+    border-bottom: 2px solid var(--background-color-green);
+    color: var(--color-primary-green);
+}
+
+.our-services-area .filtr-container .our-services-block {
+    position: relative;
+    transition: .3s all;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.our-services-area .filtr-container .our-services-block:before {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(240, 50, 107, 0.9);
+    transition: .3s all;
+}
+
+.our-services-area .filtr-container .our-services-block img {
+    border-radius: 15px;
+} 
+/*============ our services ============*/
+
+/*============ cover images ============*/
+.cover-area {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    width: 100%;
+    display: block;
+}
+
+.cover-area .overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 21, 38, 0.7);
+}
+
+.cover-area .cover-absolute {
+    position: absolute;
+}
+
+.cover-area .breadcrumb {
+    background-color: transparent;
+    padding: 0rem;
+    margin: 0;
+}
+
+.cover-area .breadcrumb .breadcrumb-card {
+    list-style: none;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 10px 0px;
+    position: relative;
+}
+
+.cover-area .breadcrumb .breadcrumb-card .breadcrumb-item {
+    padding-right: 5px;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.cover-area .breadcrumb .breadcrumb-card .breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #ffffff;
+}
+
+.cover-area .breadcrumb .breadcrumb-card .breadcrumb-item:last-child {
+    font-weight: 700;
+}
+
+.cover-area .cover-content {
+     position: relative;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}   
+
+.cover-area .cover-content .title {
+    margin-bottom: 10px;
+}
+
+.cover-area .cover-content h1 {
+    font-size: 2.5rem;
+}
+
+.cover-area .cover-content .content {
+    margin-bottom: 30px;
+}
+
+.cover-area .cover-content p {
+    font-size: 1.2rem;
+    margin: 0;
+}  
+/*============ cover images ============*/
+
+/*============ contact us ============*/
+.contact-area .contact-card {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 20px 15px;
+    text-align: center;
+    margin-bottom: 15px;
+    transition: transform 0.3s;
+}
+
+.contact-area .contact-card:hover {
+    transform: translateY(-5px);
+}
+
+.contact-area .contact-card .icon {
+    color: var(--color-primary-green);
+    border: 2px dotted var(--color-primary-green);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.7rem;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.contact-area .contact-card:hover .icon {
+    scale: 1.1;
+}
+
+.contact-area .contact-card .content .title h5 {
+    color: var(--color-primary-blue);
+    margin-bottom: 15px;
+}
+/*============ contact us ============*/
+
+/*============ our work ============*/
+.our-work-area {
+    text-align: center;
+}
+
+.our-work-area .our-work-filter button {
+    position: relative;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 10px;
+    padding: 8px 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.our-work-area .our-work-filter button:hover {
+    border-bottom: 2px solid var(--background-color-green);
+    color: var(--color-primary-green);
+}
+
+.our-work-area .our-work-filter button.active {
+    border-bottom: 2px solid var(--background-color-green);
+    color: var(--color-primary-green);
+}
+
+.our-work-area .filtr-container .our-work-block {
+    position: relative;
+    transition: .3s all;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.our-work-area .filtr-container .our-work-block:before {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(240, 50, 107, 0.9);
+    transition: .3s all;
+}
+
+.our-work-area .filtr-container .our-work-block img {
+    border-radius: 15px;
+} 
+/*============ our work ============*/
+
+/*============ interested ============*/
+.interested-list-area .interested-box {
+    box-shadow: 0px 0px 20px var(--color-shadow-green);
+    background-color: var(--color-white);
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 20px;
+    transition: 0.5s;
+}
+
+.interested-list-area .interested-box .interested-list-card {
+    display: flex !important;
+    padding: 12px 0px 10px 0px;
+    align-items: center;
+}
+
+.interested-list-area .interested-box .interested-list-card .interested-list-images {
+    border: 2px dotted var(--color-primary-blue);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.7rem;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+    align-content: center;
+}
+
+.interested-list-area .interested-box .interested-list-card .interested-list-images img {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.interested-list-area .interested-box .interested-list-card .interested-list-content {
+    padding-left: 15px;
+    display: inline-block;
+    width: calc(100% - 100px);
+}
+
+.interested-list-area .interested-box .interested-list-card .interested-list-content .header {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.interested-form-area .interested-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.5s ease;
+    box-shadow: 0 5px 20px 0 rgb(0 0 0 / 10%);
+    background-color: var(--background-color);
+}
+
+.interested-form-area .interested-card .remark {
+    font-size: 14px;
+    border: none;
+    padding: 0px 0px 10px 0px;
+}
+
+.interested-form-area .interested-card .btn-interested-submit {
+    background-color: var(--background-color-green);
+    color: var(--color-white);
+    padding: 15px;
+    border-radius: 30px;
+    transition: all 0.3s;
+}
+
+.interested-form-area .interested-card .btn-interested-submit:hover {
+    background-color: color-mix(in srgb, var(--background-color-green) 90%, white 15%);
+    box-shadow: 0 0 10px var(--background-color-green);
+}
+
+.interested-form-area .interested-form-menu a {
+    color: var(--color-white);
+}
+
+.interested-form-area .interested-form-menu {
+    padding-bottom: 10px;
+}
+
+.interested-form-area .interested-form-menu a .wrpper-center {
+    background-color: var(--background-color-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    font-weight: bold;
+    border: 2px solid var(--background-color-green);
+    border-radius: 15px;
+    text-decoration: none;
+    color: var(--color-white);
+    transition: all 0.3s;
+}
+
+.interested-form-area .interested-form-menu a:hover .wrpper-center {
+    background-color: color-mix(in srgb, var(--background-color-green) 90%, white 15%);
+    box-shadow: 0 0 10px var(--background-color-green);
+}
+
+.interested-form-area .interested-form-menu a .wrpper-center .images img {
+    padding-right: 10px;
+    width: 70px;
+}
+
+.interested-form-area .interested-form-menu a .wrpper-center .content span {
+    width: calc(100% - 40px);
+    padding-left: 16px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.interested-detail-area .interested-detail-card .header {
+    margin-bottom: 15px;
+}
+
+.interested-detail-area .interested-detail-card .content {
+    color: rgba(33, 37, 41, 0.8);
+    margin-bottom: 15px;
+}
+
+.interested-detail-area .interested-detail-card .detail {
+    background-color: var(--background-color-green);
+    color: var(--color-white);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.interested-information-area .interested-information-card {
+    text-align: center;
+    background-color: var(--background-color-blue);
+    height: 100%;
+    padding: 15px;
+    color: var(--color-white);
+    border-radius: 15px;
+}
+
+.interested-information-area .interested-information-card .images,
+.interested-information-area .interested-information-card .header {
+    margin-bottom: 15px;
+}
+
+.interested-information-area .interested-information-card .images img {
+    width: 80px;
+}
+
+.interested-spec-area .interested-spec-card,
+.interested-spec-area .interested-parameter-card {
+    box-shadow: 0px 0px 20px 0px var(--background-color-blue);
+    border-radius: 15px;
+    padding: 20px 15px; 
+    height: 100%;
+}
+
+.interested-spec-area .interested-spec-card .header,
+.interested-spec-area .interested-parameter-card .header {
+    margin-bottom: 15px;
+}
+
+.interested-spec-area .interested-spec-card .content .spec-card {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+}
+
+.interested-spec-area .interested-spec-card .content .spec-card .spec-detail h6 {
+    color: rgb(33 37 41 / 50%);
+    margin-bottom: 5px;
+}
+
+.interested-spec-area .interested-parameter-card .content .parameter-card {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    padding: 5px;
+}
+
+.interested-spec-area .interested-parameter-card .content .parameter-card:first-child {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-bottom: 2px solid rgb(161, 161, 161);
+}
+
+.interested-spec-area .interested-parameter-card .content .parameter-card:not(:first-child) {
+    border-bottom: 1px dashed #bdbdbd;
+}
+
+.interested-spec-area .interested-parameter-card .content .parameter-card span {
+    text-align: end;
+}
+/*============ interested ============*/
