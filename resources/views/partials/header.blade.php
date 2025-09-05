@@ -20,21 +20,21 @@
                 <nav id="navbar-menu" class="navbar-menu">
                     <ul>
                         <li>
-                            <a href="{{ url('/') }}" class="nav-link">หน้าแรก</a>
+                            <a href="{{ route('homepage') }}" class="nav-link">หน้าแรก</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="nav-link" ><span>ผลิตภัณฑ์</span> <i class="fa-solid fa-angle-down toggle-dropdown"></i></a>
                             <ul>
-                                <li><a href="{{ url('/product/solar') }}">แผงโซลาร์เซลล์ (Solar Panel)</a></li>
-                                <li><a href="{{ url('/product/inverter') }}">อินเวอร์เตอร์ (Inverter)</a></li>
-                                <li><a href="{{ url('/product/sensor') }}">เซ็นเซอร์ (Sensor)</a></li>
+                                <li><a href="{{ route('solar') }}">แผงโซลาร์เซลล์ (Solar Panel)</a></li>
+                                <li><a href="{{ route('inverter') }}">อินเวอร์เตอร์ (Inverter)</a></li>
+                                <li><a href="{{ route('sensor') }}">เซ็นเซอร์ (Sensor)</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ url('/our_work') }}" class="nav-link">ผลงานของเรา</a>
+                            <a href="{{ route('our_work') }}" class="nav-link">ผลงานของเรา</a>
                         </li>
                         <li>
-                            <a href="{{ url('/contact_us') }}" class="nav-link">ติดต่อเรา</a>
+                            <a href="{{ route('contact_us') }}" class="nav-link">ติดต่อเรา</a>
                         </li>
                     </ul>
                     <i class="mobile-nav-toggle fa-solid fa-bars"></i>

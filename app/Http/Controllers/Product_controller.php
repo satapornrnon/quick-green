@@ -3,21 +3,63 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use App\Models\Interested;
 
 class Product_controller extends Controller
 {
-    function solar()
+	public function __construct()
     {
-        return view('product.solar');
     }
 
-    function inverter()
+    public function solar()
     {
-        return view('product.inverter');
+        $data = array(
+            'product_id' => 1,
+            'interested_url' => url('/product/solar'),
+        );
+        return view('product.solar', $data);
     }
 
-    function sensor()
+    public function inverter()
     {
-        return view('product.sensor');
+        $data = array(
+            'product_id' => 2,
+            'interested_url' => url('/product/inverter'),
+        );
+        return view('product.inverter', $data);
+    }
+
+    public function sensor()
+    {
+        $data = array(
+            'product_id' => 3,
+            'interested_url' => url('/product/sensor'),
+        );
+        return view('product.sensor', $data);
+    }
+
+    public function save(Request $request)
+    {
+        $data_save = [
+            'product_id' => $request->input('product_id'),
+            'interested_date' => Config::get('myarrays.current_date'),
+            'interested_time' => Config::get('myarrays.current_time'),
+            'interested_status' => 'pending',
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'mobile' => str_replace("-", "", $request->input('mobile')),
+            'more_information' => $request->input('more_information') ?? '',
+            'time_callback' => Config::get('myarrays.time_callback')[$request->input('time_callback')],
+            'accept_policy' => $request->input('accept_policy'),
+            'created_at' => Config::get('myarrays.current_datetime'),
+        ];
+        $success = Interested::create($data_save);
+
+        if ($success) {
+            return response()->json(['status' => true, 'message' => 'บันทึกข้อมูลเรียบร้อยแล้ว']);
+        } else {
+            return response()->json(['status' => false, 'message' => 'เกิดข้อผิดพลาด']);
+        }
     }
 }

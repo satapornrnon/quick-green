@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                 <div class="footer-about wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
-                    <a href="#" class="logo d-flex align-items-center">
+                    <a href="{{ route('homepage') }}" class="logo d-flex align-items-center">
                         <span class="sitename">Quick Green</span>
                     </a>
 
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <ul class="footer-contact" id="ft-nano">
-                            <li><a href="#">แผงโซลาร์เซลล์ (Solar Panel)</a></li>
+                            <li><a href="{{ route('solar') }}">แผงโซลาร์เซลล์ (Solar Panel)</a></li>
                         </ul>
                     </div>
                     <div class="link-wrapper mt-20">
@@ -50,7 +50,18 @@
                             </div>
                         </div>
                         <ul class="footer-contact" id="ft-hire-purchase">
-                            <li><a href="#">อินเวอร์เตอร์ (INVERTER)</a></li>
+                            <li><a href="{{ route('inverter') }}">อินเวอร์เตอร์ (INVERTER)</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-wrapper mt-20">
+                        <div class="footer-title" data-toggle="#ft-hire-purchase">
+                            <h4 class="title">สนใจเซ็นเซอร์</h4>
+                            <div class="icon">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <ul class="footer-contact" id="ft-hire-purchase">
+                            <li><a href="{{ route('sensor') }}">เซ็นเซอร์ (Sensor)</a></li>
                         </ul>
                     </div>
                 </div>
@@ -65,9 +76,9 @@
                             </div>
                         </div>
                         <ul class="footer-contact" id="ft-about-us">
-                            <li><a href="#our-philosophy-area" class="page-scroll">ปรัชญาของ ควิก กรีน</a></li>
-                            <li><a href="#service-area" class="page-scroll">บริการของ ควิก กรีน</a></li>
-                            <li><a href="{{ url('/our_work') }}" class="page-scroll">ผลงานของ ควิก กรีน</a></li>
+                            <li><a href="{{ route('homepage') }}" class="page-scroll">ปรัชญาของ ควิก กรีน</a></li>
+                            <li><a href="{{ route('homepage') }}" class="page-scroll">บริการของ ควิก กรีน</a></li>
+                            <li><a href="{{ route('our_work') }}" class="page-scroll">ผลงานของ ควิก กรีน</a></li>
                         </ul>
                     </div>
                 </div>

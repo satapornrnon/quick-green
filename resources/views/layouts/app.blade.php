@@ -13,8 +13,10 @@
     <?php
 		load_css(array(
 			asset('css/bootstrap/bootstrap.css'),
+			asset('css/sweetalert/sweetalert.min.css'),
 			asset('css/fontawesome/all.css'),
-			asset('css/wow/css/animate.min.css'),
+			asset('css/validation/validation.css'),
+			asset('css/wow/animate.min.css'),
 			asset('css/app.css'),
 		));
     ?>
@@ -24,8 +26,12 @@
 			asset('js/jquery/jquery-3.6.0.js'),
 			asset('js/jquery/jquery-ui.js'),
 			asset('js/bootstrap/bootstrap.bundle.js'),
-			asset('js/wow/js/wow.min.js'),
+			asset('js/loadingoverlay/loadingoverlay.min.js'),
+			asset('js/sweetalert/sweetalert.min.js'),
+			asset('js/validation/jquery.validate.min.js'),
+			asset('js/wow/wow.min.js'),
 			asset('js/global.js'),
+			asset('js/general_helper.js'),
 		));
     ?>
 </head>

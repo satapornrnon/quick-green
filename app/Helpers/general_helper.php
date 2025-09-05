@@ -107,4 +107,27 @@ if (! function_exists('active_menu')) {
     }
     
 }
+
+if (! function_exists('gen_loan_code')) {
+    function gen_loan_code()
+    {
+        // หาเลขล่าสุดของปีปัจจุบัน
+        $year = date('Y');
+        $interested = DB::table('tbl_interested')
+            ->select(DB::raw("MAX(SUBSTRING(interested_code, 10)) as interested_code"))
+            ->where('created_at', 'like', $year . '%')
+            ->first();
+
+        if (empty($interested->interested_code)) {
+            $interested_no = 0;
+        } else {
+            $interested_no = (int) $interested->interested_code;
+        }
+
+        $interested_head = 'ORDER' . date("ym"); // เช่น LOAN2509
+        $data = $interested_head . str_pad($interested_no + 1, 5, "0", STR_PAD_LEFT); // เช่น LOAN250900001
+
+        return $data;
+    }
+}
 ?>

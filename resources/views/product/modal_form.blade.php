@@ -15,7 +15,8 @@
         <span><strong>หมายเหตุ :</strong> กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย <span class="text-red"><strong>*</strong></span></span>
     </div>
 
-    <form action="" class="form-validation" method="POST" role="form">
+    <form action="{{ $interested_url }}" class="form-validation" id="interested-form" method="POST" role="form">
+        @csrf
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                 <div class="form-group">
@@ -32,7 +33,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div class="form-group">
                     <label for="mobile">เบอร์โทรศัพท์มือถือ<span class="required">*</span></label>
-                    <input type="text" class="form-control" id="mobile" name="mobile" data-rule-required="true" data-msg-required="กรุณากรอกเบอร์โทรศัพท์มือถือ" data-rule-minlength="10" data-msg-minlength="กรุณากรอกเบอร์โทรศัพท์มือถือไม่เกิน 10 ตัวอักษร" data-rule-number="true" data-msg-number="กรุณากรอกข้อมูลเป็นตัวเลขเท่านั้น">
+                    <input type="text" class="form-control" id="mobile" name="mobile" data-rule-required="true" data-msg-required="กรุณากรอกเบอร์โทรศัพท์มือถือ" data-rule-minlength="12" data-msg-minlength="กรุณากรอกเบอร์โทรศัพท์มือถือ 10 ตัวอักษร" data-rule-maxlength="12" data-msg-maxlength="กรุณากรอกเบอร์โทรศัพท์มือถือไม่เกิน 10 ตัวอักษร">
                 </div>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -40,11 +41,11 @@
                     <label for="time_callback">ช่วงเวลาที่สะดวกให้ติดต่อกลับ<span class="required">*</span></label>
                     <select class="form-control" id="time_callback" name="time_callback" data-rule-required="true" data-msg-required="กรุณาเลือกช่วงเวลาที่สะดวก">
                         <option value="" selected>เลือกช่วงเวลา</option>
-                        <!-- <?php
-                            // foreach ($time_callback as $key => $value) {
-                            //     echo '<option value="'. $key .'">'. $value .'</option>';
-                            // }
-                        ?> -->
+                        <?php
+                            foreach (config('myarrays.time_callback') as $key => $value) {
+                                echo '<option value="'. $key .'">'. $value .'</option>';
+                            }
+                        ?>
                     </select>
                 </div>
             </div>
@@ -66,6 +67,8 @@
                 </div>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
+                <input type="hidden" class="form-control" id="product_id" name="product_id" value="{{ $product_id }}">
+
                 <div class="remark">
                     <span>*หลังจากที่กดลงทะเบียนแล้ว กรุณารอเจ้าหน้าที่ติดต่อกลับ</span>
                 </div>

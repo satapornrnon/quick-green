@@ -1,0 +1,30 @@
+form.form-validation label.error, label.error {
+	color: red !important;
+	font-style: italic !important;
+    font-size: 90% !important;
+    display: none;
+}
+
+div.error { 
+    display: none; 
+}
+
+input.checkbox {
+    border: none 
+}
+
+input.error { 
+    border: 1px dotted red; 
+}
+
+textarea.error { 
+    border: 1px dotted red; 
+}
+
+select.error { 
+    border: 1px dotted red; 
+}
+
+form.cmxform .gray * { 
+    color: gray; 
+}
