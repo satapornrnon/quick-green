@@ -156,7 +156,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
-                    <div class="section-title section-bg-green text-blue">
+                    <div class="section-title section-bg-green text-green">
                         <h3>คํานวน ออกแบบระบบ</h3>
                     </div>
                 </div>
