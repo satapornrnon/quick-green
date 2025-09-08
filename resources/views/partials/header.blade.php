@@ -1,3 +1,19 @@
+<?php
+$sidebar_menu = array();
+
+$sidebar_menu[] = array("name" => "หน้าแรก", "source" => "homepage_controller", "url" => route('homepage'));
+
+$product_dropdown_menu = array(
+    array("name" => "แผงโซลาร์เซลล์ (Solar Panel)", "source" => "product_controller", "url" => route('solar')),
+    array("name" => "อินเวอร์เตอร์ (Inverter)", "source" => "product_controller", "url" => route('inverter')),
+    array("name" => "route('sensor')", "source" => "product_controller", "url" => route('sensor')),
+);
+$sidebar_menu[] = array("name" => "ผลิตภัณฑ์", "source" => "product_controller", "url" => "", "dropdown_menu" => $product_dropdown_menu);
+
+$sidebar_menu[] = array("name" => "ผลงานของเรา", "source" => "our_work_controller", "url" => route('our_work'));
+$sidebar_menu[] = array("name" => "ติดต่อเรา", "source" => "contact_us_controller", "url" => route('contact_us'));
+?>
+
 <header class="header-area sticky-top">
     <div class="topbar-area">
         <div class="container">
@@ -19,8 +35,29 @@
 
                 <nav id="navbar-menu" class="navbar-menu">
                     <ul>
-                        <li>
-                            <a href="{{ route('homepage') }}" class="nav-link">หน้าแรก</a>
+                        @foreach ($sidebar_menu as $main_menu)
+                            @php
+                                $dropdown_menu = get_array_value($main_menu, "dropdown_menu");
+                                $active_class = active_menu($main_menu['source'], $dropdown_menu);
+                            @endphp
+
+                            @if(!$dropdown_menu)
+                                <li>
+                                    <a href="{{ $main_menu['url'] }}" class="nav-link {{ $active_class }}">{{ $main_menu['name'] }}</a>
+                                </li>
+                            @else
+                                <li class="dropdown">
+                                    <a href="#" class="nav-link {{ $active_class }}"><span>{{ $main_menu['name'] }}</span> <i class="fa-solid fa-angle-down toggle-dropdown"></i></a>
+                                    <ul>
+                                        @foreach ($main_menu['dropdown_menu'] as $sub_menu)
+                                            <li><a href="{{ $sub_menu['url'] }}">{{ $sub_menu['name'] }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
+                        @endforeach
+                        <!-- <li>
+                            <a href="{{ route('homepage') }}" class="nav-link active">หน้าแรก</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="nav-link" ><span>ผลิตภัณฑ์</span> <i class="fa-solid fa-angle-down toggle-dropdown"></i></a>
@@ -35,7 +72,7 @@
                         </li>
                         <li>
                             <a href="{{ route('contact_us') }}" class="nav-link">ติดต่อเรา</a>
-                        </li>
+                        </li> -->
                     </ul>
                     <i class="mobile-nav-toggle fa-solid fa-bars"></i>
                 </nav>
