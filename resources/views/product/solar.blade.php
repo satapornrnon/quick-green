@@ -22,7 +22,7 @@
         <div class="container">
             <div class="cover-content">
                 <div class="title">
-                    <h1>แผงโซลาร์เซลล์ (Solar Panel)</h1>
+                    <h1 class="title-xl">แผงโซลาร์เซลล์ (Solar Panel)</h1>
                 </div>
                 <div class="content">
                     <p>Quick Green - ผู้เชี่ยวชาญด้านโซลาร์เซลล์ครบวงจร มั่นใจคุณภาพ มาตรฐานสากล</p>

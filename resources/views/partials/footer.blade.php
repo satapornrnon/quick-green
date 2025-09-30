@@ -89,7 +89,7 @@
 
 <footer class="footer-copyright-area">
     <div class="container copyright text-center">
-        <span class="m-0 text-white"><i class="far fa-copyright"></i> Quick Leasing Co., Ltd. , All rights reserved <script> document.write(new Date().getFullYear()); </script></span>
+        <span class="m-0 text-white"><i class="far fa-copyright"></i> Quick Green Co., Ltd. , All rights reserved <script> document.write(new Date().getFullYear()); </script></span>
     </div>
 </footer>
 

@@ -14,4 +14,8 @@
 }
 
 @media (max-width: 480px) {
+    .cover-area .cover-content p {
+        font-size: 1rem;
+        margin: 0;
+    }  
 }

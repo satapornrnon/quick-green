@@ -20,7 +20,7 @@
         <div class="container">
             <div class="cover-content">
                 <div class="title">
-                    <h1>ติดต่อเรา</h1>
+                    <h1 class="title-xl">ติดต่อเรา</h1>
                 </div>
                 <div class="content">
                     <p>ช่องทางการติดต่อสอบถาม เจ้าหน้าที่ ควิก กรีน</p>

@@ -6,7 +6,7 @@ $sidebar_menu[] = array("name" => "หน้าแรก", "source" => "homepage
 $product_dropdown_menu = array(
     array("name" => "แผงโซลาร์เซลล์ (Solar Panel)", "source" => "product_controller", "url" => route('solar')),
     array("name" => "อินเวอร์เตอร์ (Inverter)", "source" => "product_controller", "url" => route('inverter')),
-    array("name" => "route('sensor')", "source" => "product_controller", "url" => route('sensor')),
+    array("name" => "เซ็นเซอร์ (Sensor)", "source" => "product_controller", "url" => route('sensor')),
 );
 $sidebar_menu[] = array("name" => "ผลิตภัณฑ์", "source" => "product_controller", "url" => "", "dropdown_menu" => $product_dropdown_menu);
 

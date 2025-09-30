@@ -16,8 +16,8 @@
 			asset('css/sweetalert/sweetalert.min.css'),
 			asset('css/fontawesome/all.css'),
 			asset('css/validation/validation.css'),
-			asset('css/wow/animate.min.css'),
-			asset('css/app.css'),
+			asset('css/datatables/datatables.css'),
+			asset('css/backoffice/app.css'),
 		));
     ?>
 
@@ -29,21 +29,26 @@
 			asset('js/loadingoverlay/loadingoverlay.min.js'),
 			asset('js/sweetalert/sweetalert.min.js'),
 			asset('js/validation/jquery.validate.min.js'),
-			asset('js/wow/wow.min.js'),
+			asset('js/datatables/datatables.js'),
 			asset('js/general_helper.js'),
-			asset('js/global.js'),
+			asset('js/backoffice/global.js'),
 		));
     ?>
+
 </head>
 <body>
 
-    @include('partials.header')
-    
-    @include('partials.menu')
+    <div class="page-layout">
+        <div class="page-main">
+            @include('backoffice.partials.topbar')
 
-    @yield('content')
+            @yield('backoffice.content')
+            
+            @include('backoffice.partials.footer')
+        </div>
 
-    @include('partials.footer')
+        @include('backoffice.partials.menu')
+    </div>
 
 </body>
 </html>

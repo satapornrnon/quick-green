@@ -18,7 +18,7 @@ var ProductModule;
                 
                 //===== typing text animation script
                 var typed = new Typed(".typing", {
-                    strings: ["ให้เจ้าหน้าที่ติดต่อกลับ", "ปรึกษา ควิก ลิสซิ่ง ฟรี"],
+                    strings: ["ให้เจ้าหน้าที่ติดต่อกลับ", "ปรึกษา ควิก กรีน ฟรี"],
                     typeSpeed: 60,
                     backSpeed: 20,
                     loop: true

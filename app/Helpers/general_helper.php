@@ -116,4 +116,77 @@ if (! function_exists('active_menu')) {
     }
     
 }
+
+if (! function_exists('active_menu_backoffice')) {
+
+    function active_menu_backoffice($routeNames = [], $dropdown_menu, $class = 'active') {
+
+        $controller = strtolower(class_basename(Route::current()->controller));
+
+        if($routeNames == $controller) {
+            return $class;
+        } else if ($dropdown_menu && count($dropdown_menu)) {
+            foreach ($dropdown_menu as $key => $dropdown) {
+                if (get_array_value($dropdown, "source") === $controller) {
+                    return "active";
+                }
+            }
+        }
+        return '';
+    }
+    
+}
+
+/**
+ * Generate a unique interested code
+ * 
+ * @return string unique interested code
+ */
+if (!function_exists('gen_interested_code')) {
+    function gen_interested_code() {
+
+
+
+
+        echo 'A1';
+        
+        $ci = app();
+        $ci->load->model('interested'); 
+
+        $sql = "SELECT MAX( SUBSTRING( interested_code, 9 ) ) AS interested_code FROM tbl_interested WHERE created_at LIKE '". date('Y') ."%' ORDER BY id DESC";
+        $interested = $ci->interested_model->get_interested($sql);  
+
+        print_r($interested);
+
+
+        // $sql = "SELECT MAX( SUBSTRING( loan_code, 9 ) ) AS loan_code FROM tbl_loan WHERE created_at LIKE '". date('Y') ."%' ORDER BY id DESC";
+        // $loan = $ci->loan_model->get_loan($sql);
+
+        // if($loan[0]['loan_code'] == ''){
+        //     $loan_no = '00000';
+        // } else {
+        //     $loan_no = $loan[0]['loan_code'];
+        // }
+
+        // $loan_head = 'LOAN'.date("ym");
+        // $data = $loan_head.substr("00000".($loan_no+1), -5); 
+
+        // return $data;
+    }
+}
+
+
+/**
+ * Generate a unique product code
+ * 
+ * @return string unique product code
+ */
+if (!function_exists('gen_product_code')) {
+    function gen_product_code() {
+        $prefix = 'PRD';
+        $unique_id = strtoupper(uniqid());
+        return $prefix . $unique_id;
+    }
+}
+
 ?>

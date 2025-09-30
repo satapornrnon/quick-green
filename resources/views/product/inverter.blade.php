@@ -22,7 +22,7 @@
         <div class="container">
             <div class="cover-content">
                 <div class="title">
-                    <h1>อินเวอร์เตอร์ (Inverter)</h1>
+                    <h1 class="title-xl">อินเวอร์เตอร์ (Inverter)</h1>
                 </div>
                 <div class="content">
                     <p>Quick Green – ผู้เชี่ยวชาญด้านการขายและติดตั้งโซลาร์เซลล์ครบวงจร</p>

@@ -6,7 +6,7 @@
     <section class="hero-area">
         <div class="overlay"></div>
         <div class="hero-content">
-            <h1>โซลาร์เซลล์เพื่ออนาคตที่ยั่งยืน</h1>
+            <h1 class="title-xl">โซลาร์เซลล์เพื่ออนาคตที่ยั่งยืน</h1>
             <p>Quick Green – ผู้เชี่ยวชาญด้านการขายและติดตั้งโซลาร์เซลล์ครบวงจร</p>
 
             <a href="{{ url('/product/solar') }}" class="btn-quotation-solar">แผงโซลาร์เซลล์ (Solar Panel)</a>

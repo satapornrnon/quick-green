@@ -1,0 +1,99 @@
+.page-layout .page-main .page-content {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    padding: 20px 20px 20px 10px;
+    transition: all 0.3s;
+}
+
+.page-content .breadcrumb {
+    font-size: 14px;
+    color: var(--color-primary-green);
+    font-weight: 500;
+}
+
+.page-content .breadcrumb a {
+    color: #89bda8;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.page-content .breadcrumb a:hover{
+    color: rgb(81, 143, 122);;
+}
+
+.page-content .card {
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+}
+
+.page-content .card .card-body {
+    padding: 0px 20px 20px 20px;
+}   
+
+.page-content .card .card-title {
+    padding: 20px 0 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #017057;
+}
+
+.page-content .card .card-title span {
+    color: #899bbd;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.page-content .interested-pending-card {
+    color: #ffa426;
+}
+
+.page-content .interested-pending-card .card-icon {
+    color: #ffa426;
+    background: #ffecdf;
+}
+
+.page-content .interested-callback-card {
+    color: #6777EF;
+}
+
+.page-content .interested-callback-card .card-icon {
+    color: #6777EF;
+    background: #e7eaff;
+}
+
+.page-content .interested-completed-card {
+    color: #2eca6a;
+}
+
+.page-content .interested-completed-card .card-icon {
+    color: #2eca6a;
+    background: #e0f8e9;
+}
+
+.page-content .interested-all-card {
+    color: #757575;
+}
+
+.page-content .interested-all-card .card-icon {
+    color: #757575;
+    background: #efefef;
+}
+
+.page-content .card .card-icon {
+    font-size: 32px;
+    line-height: 0;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.page-content .card .card-body h6 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}

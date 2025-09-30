@@ -36,7 +36,7 @@ class Interested extends Model
 
         static::creating(function ($model) {
             if (empty($model->interested_code)) {
-                $model->interested_code = gen_loan_code(); // เรียกจาก Helper
+                $model->interested_code = gen_interested_code(); // เรียกจาก Helper
             }
         });
     }
