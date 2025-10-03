@@ -42,7 +42,11 @@ Route::get('/contact-us', [Frontend_contact_us_controller::class, 'index'])->nam
 //======== Backoffice ========//
 Route::prefix('backoffice')->group(function () {
     Route::get('/', [Backend_dashboard_controller::class, 'index'])->name('dashboard');
-    Route::get('/interested', [Backend_interested_controller::class, 'index'])->name('interested');
+
+    Route::prefix('interested')->group(function () {
+        Route::get('/', [Backend_interested_controller::class, 'index'])->name('interested');
+        Route::post('get_data', [Backend_interested_controller::class, 'get_data']);
+    });
 
     Route::prefix('product')->group(function () {
         Route::get('/', [Backend_product_controllerr::class, 'index'])->name('product');

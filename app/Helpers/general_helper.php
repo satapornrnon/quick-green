@@ -192,7 +192,6 @@ if (!function_exists('gen_interested_code')) {
 
 }
 
-
 /**
  * Generate a unique product code
  * 
@@ -220,4 +219,34 @@ if (!function_exists('gen_product_code')) {
 
 }
 
+// ------------------------------------------------------------------------
+if (!function_exists('mobile_format')) {
+
+    function mobile_format($number) {
+        $number = preg_replace("/[^\d]/","",$number);
+        $length = strlen($number);
+        if($length == 10) {
+            $number = preg_replace("/^1?(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $number);
+        } else if($length == 9) {
+            $number = preg_replace("/^1?(\d{2})(\d{3})(\d{4})$/", "$1-$2-$3", $number);
+        }
+        return $number;
+    }
+}
+
+// ------------------------------------------------------------------------
+if ( ! function_exists('get_interested_label')){
+
+    function get_interested_label($interested_status)
+    {        
+        if($interested_status == 'pending'){
+            $data = "<span class='badge bg-warning'>รอดำเนินการ</span>";
+        } else if($interested_status == 'completed'){
+            $data = "<span class='badge bg-success'>เสร็จสิ้น</span>";
+        }
+
+        return $data;
+    }
+
+}
 ?>

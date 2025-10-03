@@ -18,6 +18,42 @@
                     </nav>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-items-center justify-content-between">    
+                                <h5 class="card-title">รายงานลงทะเบียน</h5>
+                            </div>
+
+                            <div class="table-responsive" style="overflow-y: auto;">
+                                <table class="table table-hover display nowrap" id="table_interested">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th scope="col"><i class="fa fa-bars"></i></th>
+                                            <th scope="col">ลำดับ</th>
+                                            <th scope="col">วัน-เวลาลงทะเบียน</th>
+                                            <th scope="col">เลขที่ลงทะเบียน</th>
+                                            <th scope="col">ผลิตภัณฑ์</th>
+                                            <th scope="col">ชื่อ-นามสกุล</th>
+                                            <th scope="col">เบอร์โทรศัพท์</th>
+                                            <th scope="col">สถานะ</th>
+                                            <th scope="col">เวลาที่สะดวก</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <?php
+        load_js(array(
+            asset('js/backoffice/interested.js'),
+        ));
+    ?>
 @endsection
