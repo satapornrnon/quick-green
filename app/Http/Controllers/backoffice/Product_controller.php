@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class Product_controller extends Controller
 {
@@ -12,86 +15,131 @@ class Product_controller extends Controller
         return view('backoffice.product.index');
     }
 
-    public function get_data()
+    public function get_data(Request $request)
     {
-        $data = array();
+        // ดึงค่าจาก DataTables request
+        $draw   = $request->input('draw');
+        $start  = $request->input('start', 0);
+        $length = $request->input('length', 10);
+        $order  = $request->input('order')[0] ?? ['column' => 0, 'dir' => 'asc'];
+        $search = $request->input('search')['value'] ?? '';
 
-        $columns = array( 
+        // mapping column index -> field name
+        $columns = [
             0 => 'id',
             1 => 'id',
-            2 => 'category_code',
-            3 => 'product_code',
-            4 => 'product_name_th',
-            5 => 'product_name_en',
-            6 => 'product_status',
-            7 => 'product_image',
-        );
-        
-        $where = "";
-        if($this->input->post('search')['value'] != "") { 
-            foreach ($columns as $key => $column) {
-                $ci = ($key == 0) ? ' AND ( ' : 'OR ';
-                $where .= $ci . $columns[$key] ." LIKE '%". $this->input->post('search')['value'] ."%' ";
-            }
-            $where .= ")";
+            2 => 'product_code',
+            3 => 'product_name',
+            4 => 'product_status',
+            5 => 'product_image',
+            6 => 'product_cover',
+        ];
+
+        $query = DB::table('tbl_product')->get();
+
+        // ถ้ามีการค้นหา
+        if (!empty($search)) {
+            $query->where(function($q) use ($search) {
+                $q->where('product_name', 'like', "%{$search}%")
+                ->orWhere('product_code', 'like', "%{$search}%");
+            });
         }
-    
-        $count_result = $this->product_model->get_product("SELECT count(*) AS num_rows FROM tbl_product WHERE deleted = 0 $where");
 
-        $sql = "SELECT p.*,c.category_code FROM tbl_product p LEFT JOIN tbl_category c ON (p.category_id = c.id) WHERE p.deleted = 0 $where ORDER BY ". $columns[$this->input->post('order')[0]['column']] ." ". $this->input->post('order')[0]['dir'] ." LIMIT ". $this->input->post('start') .",". $this->input->post('length') ." ";
-        $result = $this->product_model->get_product($sql);
-        if($result){
-            foreach ($result as $key => $value) {
-                if($value['product_status'] == 'on'){
-                    $product_status = "<span class='badge badge-success'>เปิด</span>";
-                } else if($value['product_status'] == 'off'){
-                    $product_status = "<span class='badge badge-danger'>ปิด</span>";
-                }
+        $recordsTotal = DB::table('tbl_product')->where('deleted', 0)->count();
+        $recordsFiltered = $query->count();
 
-                // if($value['product_image']){
-                //     $value['product_image'] = '<img class="img-thumbnail" src="'. base_url(get_setting('product_path') . $value['product_image']) .'" alt="Preview image" width="75">';
-                // } else {
-                //     $value['product_image'] = '';
-                // }
+        // สั่ง order ตาม DataTables
+        $orderColumn = $columns[$order['column']] ?? 'id';
+        $products = DB::table('tbl_product')->where('deleted', 0)->orderBy($orderColumn, $order['dir'])->offset($start)->limit($length)->get();
 
-                // if($value['product_banner']){
-                //     $value['product_banner'] = '<img class="img-thumbnail" src="'. base_url(get_setting('cover_path') . $value['product_banner']) .'" alt="Preview image" width="100">';
-                // } else {
-                //     $value['product_banner'] = '';
-                // }
+        $data = [];
+        foreach ($products as $value) {
 
-                // if($value['product_banner_mobile']){
-                //     $value['product_banner_mobile'] = '<img class="img-thumbnail" src="'. base_url(get_setting('cover_path') . $value['product_banner_mobile']) .'" alt="Preview image" width="100">';
-                // } else {
-                //     $value['product_banner_mobile'] = '';
-                // }
+            $product_status = $value->product_status == 'on' ? "<span class='badge bg-success'>เปิด</span>" : "<span class='badge bg-danger'>ปิด</span>";
+            $product_image = $value->product_image ? '<img class="img-thumbnail" src="'. asset('uploads/product/'. $value->product_image) .'" width="65">' : '';
+            $product_cover = $value->product_cover ? '<img class="img-thumbnail" src="'. asset('uploads/cover/'. $value->product_cover) .'" width="125">' : '';
 
-                $modal_edit = '';
-                $modal_edit .= '<button type="button" class="btn btn-sm btn-outline-info mx-1 edit_modal" data-post-id="'. $value['id'] .'" title="แก้ไขผลิตภัณฑ์" data-title="แก้ไขผลิตภัณฑ์"><i class="far fa-edit"></i></button>';
-                $modal_edit .= '<button type="button" class="btn btn-sm btn-outline-danger mx-1 cancel_modal" data-post-id="'. $value['id'] .'" title="ลบ"><i class="far fa-trash-alt"></i></button>';
+            $modal_edit  = '';
+            $modal_edit .= '<button type="button" class="btn btn-sm btn-outline-warning mx-1 edit_modal" data-post-id="'. $value->id .'" title="แก้ไขผลิตภัณฑ์สินเชื่อ" data-title="แก้ไขผลิตภัณฑ์สินเชื่อ"><i class="far fa-edit"></i></button>';
+            $modal_edit .= '<button type="button" class="btn btn-sm btn-outline-danger mx-1 cancel_modal" data-post-id="'. $value->id .'" title="ลบ"><i class="far fa-trash-alt"></i></button>';
 
-                $data[] = array(
-                    $modal_edit,
-                    '',
-                    $value['category_code'],
-                    $value['product_code'],
-                    $value['product_name_th'],
-                    $value['product_name_en'],
-                    $product_status,
-                    $value['product_image'],
-                    $value['product_banner'],
-                    $value['product_banner_mobile'],
-                );       
-            }
+            $data[] = [
+                $modal_edit,
+                '',
+                $value->product_code,
+                $value->product_name,
+                $product_status,
+                $product_image,
+                $product_cover,
+            ];
         }
     
         $responseData = array(
-            "draw"            => intval( $this->input->post('draw') ), 
-            "recordsTotal"    => intval( $count_result[0]['num_rows'] ), 
-            "recordsFiltered" => intval( $count_result[0]['num_rows'] ),
-            "data"            => $data 
+            "draw" => intval($draw),
+            "recordsTotal" => $recordsTotal,
+            "recordsFiltered" => $recordsFiltered,
+            "data" => $data
         );
     
         echo json_encode($responseData);
     }
+
+    public function save(Request $request)
+    {
+        $request->validate([
+            'product_name' => 'required|string|max:255',
+            'product_description' => 'required'
+        ]);
+
+        try {
+            $data_save = [
+                'product_name' => $request->product_name,
+                'product_description' => $request->product_description,
+                'product_status' => $request->product_status,
+            ];
+
+            if ($request->hasFile('product_image')) {
+                $product_image = move_temp_file($request->file('product_image'), public_path('uploads/product'), 'product');
+                $data_save['product_image'] = $product_image['file_name'];
+            }
+
+            if ($request->hasFile('product_cover')) {
+                $product_cover = move_temp_file($request->file('product_cover'), public_path('uploads/cover'), 'cover');
+                $data_save['product_cover'] = $product_cover['file_name'];
+            }
+
+            if(!$request->product_id){
+                $data_save['product_code'] = gen_product_code();
+                $data_save['created_at'] = Config::get('myarrays.current_datetime');
+                $data_save['created_by'] = auth()->id() ?? 0;
+
+                $success = DB::table('tbl_product')->insert($data_save);
+            } else {
+                $data_save['updated_at'] = Config::get('myarrays.current_datetime');
+                $data_save['updated_by'] = auth()->id() ?? 0;
+
+                $success = DB::table('tbl_product')->where('id', $request->product_id)->update($data_save);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'บันทึกข้อมูลเรียบร้อยแล้ว'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    // helper function
+    private function _upload_file($field, $path, $prefix){
+        if(isset($_FILES[$field]) && $_FILES[$field]['size'] > 0){
+            $file_data = move_temp_file($_FILES[$field], $path, $prefix, $_FILES[$field]['tmp_name']);
+            return $file_data['file_name'];
+        }
+        return '';
+    }
+
 }

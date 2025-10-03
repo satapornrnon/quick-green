@@ -10,13 +10,13 @@ var ProductModel;
 
             init: function(){
                 this.initProduct();
-                // this.initProductSubmit();
+                this.initProductSubmit();
             },
 
             initProduct : function(){
                 var me = this;
 
-                // me.fetch_data();
+                me.fetch_data();
 
                 $('button[name=btn-add-product]').click(function(){
                     var title = $(this).data('title');
@@ -28,6 +28,26 @@ var ProductModel;
 
                     $('#product-modal').modal('show');	
                 });
+
+                //-------------------------- IMAGE --------------------------//
+                $('#product-form button[name=product_image_browse]').click(function(e){
+                    $(this).parents().find(".product_image_file").trigger("click");
+                });
+
+                $('#product-form input[name=product_image]').change(function(e) {
+                    upload_file_image(e, this, '#product-form input[name=product_image_name]', '.preview-product-image', 1);
+                });
+                //-------------------------- IMAGE --------------------------//
+
+                //-------------------------- COVER --------------------------//
+                $('#product-form button[name=product_cover_browse]').click(function(e){
+                    $(this).parents().find(".product_cover_file").trigger("click");
+                });
+
+                $('#product-form input[name=product_cover]').change(function(e) {
+                    upload_file_image(e, this, '#product-form input[name=product_cover_name]', '.preview-product-cover', 1);
+                });
+                //-------------------------- COVER --------------------------//
 
             },
 
@@ -43,19 +63,20 @@ var ProductModel;
                     "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                     "columnDefs": [
                         { 
-                            "targets"   : [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+                            "targets"   : [ 0, 1, 2, 3, 4, 5, 6 ],
                             "className" : "column_center", 
                         }, 
                     ],
 					"ajax":{
-						url: "product/get_data",
+                        url: window.Laravel.routes.getDataProduct,
 						type: "post",
                         data: function(data){
+                            data._token = window.Laravel.csrfToken; 
                             data.search_data = {};
                         },
 						error: function(){
 							$(".table_product-error").html("");
-							$("#table_product").append('<tbody class="table_product-error text-center"><tr><th colspan="10">ไม่พบข้อมูล</th></tr></tbody>');
+							$("#table_product").append('<tbody class="table_product-error text-center"><tr><th colspan="7">ไม่พบข้อมูล</th></tr></tbody>');
 							$("#table_product_processing").css("display","none");
 						},
                         complete: function(){
@@ -72,11 +93,56 @@ var ProductModel;
 
             },
 
+            initProductSubmit : function(){
+                var me = this;
+
+                $("#product-form").validate({});
+                
+                $('#product-form').submit(function(e) {
+
+                    if (!$("#product-form").valid()) {
+                        return false;
+                    }
+                    
+					var formdata = new FormData(this);
+	
+					$.ajax({
+						url: "product/save",
+						type: "POST",
+						data: formdata,
+						dataType: "json",
+						mimeTypes:"multipart/form-data",
+						contentType: false,
+						cache: false,
+						processData: false,	
+                        error: function() {
+                            swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                        },			
+						success: function(response){
+                            if(response.success == true){
+                                $('#product-modal').modal('hide');
+
+                                $('#table_product').DataTable().clear().destroy();
+                                me.fetch_data();
+                                
+                                swal("SUCCESS", response.message, "success");
+                            } else {
+                                swal ("WARNING", response.message, "warning");
+                            }
+						}
+					});
+
+					e.preventDefault();
+
+				});
+
+            },
+
             clear_data_form : function() {
                 var me = this;
 
                 $('#product-form input[name=product_name]').val('');
-                $('#product-form input[name=product_description]').val('');
+                $('#product-form textarea[name=product_description]').val('');
                 $("#product-form input[name=product_status]").prop("checked", false);
                 
                 me.clear_data_image();
@@ -91,13 +157,9 @@ var ProductModel;
                 $('#product-form input[name=product_image]').val('');
                 $('#product-form input[name=product_image_name]').val('');
 
-                $('#product-form .preview-product-cover-desktop').html('');
-                $('#product-form input[name=product_cover_desktop]').val('');
-                $('#product-form input[name=product_cover_desktop_name]').val('');
-
-                $('#product-form .preview-product-cover-mobile').html('');
-                $('#product-form input[name=product_cover_mobile]').val('');
-                $('#product-form input[name=product_cover_mobile_name]').val('');
+                $('#product-form .preview-product-cover').html('');
+                $('#product-form input[name=product_cover]').val('');
+                $('#product-form input[name=product_cover_name]').val('');
             }
 
         }

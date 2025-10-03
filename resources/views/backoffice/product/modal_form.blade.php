@@ -39,9 +39,9 @@
                         <label for="product_image" class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">รูปภาพ<span class="required">*</span> : </label>
                         <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12">
                             <div class="preview-product-image mb-2"></div>
-                            <input type="file" class="file product_image_file" id="product_image" name="product_image" accept="">
+                            <input type="file" class="file product_image_file d-none" id="product_image" name="product_image" accept="">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" id="product_image_name" name="product_image_name" placeholder="Upload File">
+                                <input type="text" class="form-control form-control-sm" id="product_image_name" name="product_image_name" placeholder="Upload File" readonly>
                                 <div class="input-group-append">
                                     <button type="button" class="btn btn-sm btn-select-file" name="product_image_browse">Browse</button>
                                 </div>
@@ -52,10 +52,10 @@
                     <div class="form-group row">
                         <label for="product_cover" class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-form-label">รูปภาพ Cover : </label>
                         <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12">
-                            <div class="preview-product-cover-desktop mb-2"></div>
-                            <input type="file" class="file product_cover_file" id="product_cover" name="product_cover" accept="">
+                            <div class="preview-product-cover mb-2"></div>
+                            <input type="file" class="file product_cover_file d-none"" id="product_cover" name="product_cover" accept="">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" id="product_cover_name" name="product_cover_name" placeholder="Upload File">
+                                <input type="text" class="form-control form-control-sm" id="product_cover_name" name="product_cover_name" placeholder="Upload File" readonly>
                                 <div class="input-group-append">
                                     <button type="button" class="btn btn-sm btn-select-file" name="product_cover_browse">Browse</button>
                                 </div>

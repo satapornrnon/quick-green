@@ -150,3 +150,39 @@ menu, ol, ul {
     background-color: var(--background-color-green);
     color: #fff;
 }
+
+table.dataTable thead th {
+    text-align: center;
+}
+
+table.dataTable td, 
+table.dataTable th {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    vertical-align: middle;
+}
+
+/* ------------------------- SET COLUMN TBODY ----------------------- */
+table.dataTable tbody td.column_left{
+    text-align: left;
+}
+table.dataTable tbody td.column_center{
+    text-align: center;
+}
+table.dataTable tbody td.column_right{
+    text-align: right;
+}
+/* ------------------------- SET COLUMN TBODY ----------------------- */
+
+/* ------------------------- SET COLUMN TFOOT ----------------------- */
+table.dataTable tfoot th.column_left{
+    text-align: left;
+}
+table.dataTable tfoot th.column_center{
+    text-align: center;
+}
+table.dataTable tfoot th.column_right{
+    text-align: right;
+}
+/* ------------------------- SET COLUMN TFOOT ----------------------- */
+

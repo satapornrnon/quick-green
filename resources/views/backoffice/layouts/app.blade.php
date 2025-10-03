@@ -31,9 +31,19 @@
 			asset('js/validation/jquery.validate.min.js'),
 			asset('js/datatables/datatables.js'),
 			asset('js/general_helper.js'),
+			asset('js/app_files_helper.js'),
 			asset('js/backoffice/global.js'),
 		));
     ?>
+
+	<script>
+		window.Laravel = {
+			csrfToken: "{{ csrf_token() }}",
+			routes: {
+				getDataProduct: "{{ route('get_data_product') }}",
+			}
+		};
+	</script>
 
 </head>
 <body>

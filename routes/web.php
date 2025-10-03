@@ -46,7 +46,8 @@ Route::prefix('backoffice')->group(function () {
 
     Route::prefix('product')->group(function () {
         Route::get('/', [Backend_product_controllerr::class, 'index'])->name('product');
-        Route::post('/save', [Backend_product_controllerr::class, 'save']);
+        Route::post('get_data', [Backend_product_controllerr::class, 'get_data'])->name('get_data_product');
+        Route::post('save', [Backend_product_controllerr::class, 'save']);
     });
 
     Route::get('/roles', [Backend_roles_controller::class, 'index'])->name('roles');

@@ -1,4 +1,18 @@
 <?php
+/**
+ * echo array 
+ * 
+ * @param array $array
+ * @return print css links
+ */
+if (!function_exists('echo_print')) {
+
+    function echo_print($data) 
+    {
+        echo '<pre>'; print_r($data); echo '</pre>';
+    }
+
+}
 
 /**
  * Format currency
@@ -7,9 +21,12 @@
  * @return string formatted currency
  */
 if (!function_exists('echo_uri')) {
-    function echo_uri($uri = "") {
+
+    function echo_uri($uri = "") 
+    {
         echo get_uri($uri);
     }
+
 }
 
 /**
@@ -19,9 +36,12 @@ if (!function_exists('echo_uri')) {
  * @return string full URL
  */
 if (!function_exists('get_uri')) {
-    function get_uri($uri = "") {
+
+    function get_uri($uri = "") 
+    {
         return url($uri);
     }
+
 }
 
 /**
@@ -31,9 +51,12 @@ if (!function_exists('get_uri')) {
  * @return string full base URL
  */ 
 if (!function_exists('base_url')) {
-    function base_url($uri = "") {
+
+    function base_url($uri = "") 
+    {
         return url($uri);
     }
+
 }
 
 /**
@@ -44,7 +67,8 @@ if (!function_exists('base_url')) {
  */
 if (!function_exists('load_css')) {
 
-    function load_css(array $array) {
+    function load_css(array $array) 
+    {
         // $version = get_setting("app_version");
         $version = date("s");
 
@@ -63,7 +87,8 @@ if (!function_exists('load_css')) {
  */
 if (!function_exists('load_js')) {
 
-    function load_js(array $array) {
+    function load_js(array $array) 
+    {
         // $version = get_setting("app_version");
         $version = date("s");
 
@@ -82,7 +107,8 @@ if (!function_exists('load_js')) {
  */
 if (!function_exists('get_array_value')) {
 
-    function get_array_value(array $array, $key) {
+    function get_array_value(array $array, $key) 
+    {
         if (array_key_exists($key, $array)) {
             return $array[$key];
         }
@@ -99,7 +125,8 @@ if (!function_exists('get_array_value')) {
  */
 if (! function_exists('active_menu')) {
 
-    function active_menu($routeNames = [], $dropdown_menu, $class = 'active') {
+    function active_menu($routeNames = [], $dropdown_menu, $class = 'active') 
+    {
 
         $controller = strtolower(class_basename(Route::current()->controller));
 
@@ -119,7 +146,8 @@ if (! function_exists('active_menu')) {
 
 if (! function_exists('active_menu_backoffice')) {
 
-    function active_menu_backoffice($routeNames = [], $dropdown_menu, $class = 'active') {
+    function active_menu_backoffice($routeNames = [], $dropdown_menu, $class = 'active') 
+    {
 
         $controller = strtolower(class_basename(Route::current()->controller));
 
@@ -143,7 +171,9 @@ if (! function_exists('active_menu_backoffice')) {
  * @return string unique interested code
  */
 if (!function_exists('gen_interested_code')) {
-    function gen_interested_code() {
+
+    function gen_interested_code() 
+    {
 
 
 
@@ -173,6 +203,7 @@ if (!function_exists('gen_interested_code')) {
 
         // return $data;
     }
+
 }
 
 
@@ -182,11 +213,25 @@ if (!function_exists('gen_interested_code')) {
  * @return string unique product code
  */
 if (!function_exists('gen_product_code')) {
-    function gen_product_code() {
+
+    function gen_product_code() 
+    {
+        $result = DB::table('tbl_product')->select('product_code')->orderBy('product_code', 'DESC')->limit(1)->lockForUpdate()->get();
+        if($result->count() > 0){
+            foreach ($result as $key => $value) {
+                $last_running = (int) substr($value->product_code, -3);
+            }
+        } else {
+            $last_running = 0;
+        }
+
         $prefix = 'PRD';
-        $unique_id = strtoupper(uniqid());
-        return $prefix . $unique_id;
+        $new_running = $last_running + 1;
+        $new_order_code = $prefix . str_pad($new_running, 3, '0', STR_PAD_LEFT);
+
+        return $new_order_code;
     }
+
 }
 
 ?>
