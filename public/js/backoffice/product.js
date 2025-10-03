@@ -49,6 +49,17 @@ var ProductModel;
                 });
                 //-------------------------- COVER --------------------------//
 
+                $('#table_product tbody').on('click', '.edit_modal', function () {
+                    var id = $(this).data('post-id');
+                    var title = $(this).data('title');
+                    me.get_detail(id, title);
+                });
+
+                $('#table_product tbody').on('click', '.cancel_modal', function () {
+                    var id = $(this).data('post-id');
+                    me.deleted(id);
+                });
+
             },
 
             fetch_data : function(){
@@ -68,7 +79,7 @@ var ProductModel;
                         }, 
                     ],
 					"ajax":{
-                        url: window.Laravel.routes.getDataProduct,
+						url: "product/get_data",
 						type: "post",
                         data: function(data){
                             data._token = window.Laravel.csrfToken; 
@@ -89,6 +100,95 @@ var ProductModel;
                     table.column(1, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
                         cell.innerHTML = i + 1 + info.start;
                     });
+                });
+
+            },
+
+            get_detail : function(id, title){
+				var me = this;
+
+				$.ajax({
+					type: "POST",
+                    url: "product/get_detail",
+					dataType: "json",
+					data: {
+                        '_token' : window.Laravel.csrfToken,
+						'id' : id, 
+					},
+                    error: function() {
+                        swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                    },
+					success: function (responseData) {
+                        me.clear_data_form();
+                        
+                        $("#product-form .modal-title").html('');	
+                        $("#product-form .modal-title").html(title);
+
+                        if(responseData.search_data != null){
+                            
+                            $('#product-form input[name=product_name]').val(responseData.search_data.product_name);
+                            $('#product-form textarea[name=product_description]').val(responseData.search_data.product_description);
+                            $("#product-form input[name=product_status][value="+ responseData.search_data.product_status +"]").prop("checked",true);
+                            $('#product-form .preview-product-image').html(responseData.search_data.product_image);
+                            $('#product-form .preview-product-cover').html(responseData.search_data.product_cover);
+
+                            $('#product-form input[name=product_id]').val(responseData.search_data.product_id);
+
+                            $('#product-modal').modal('show');	
+                        }
+                        
+					}				  
+				});
+
+            },
+
+            deleted : function(id){
+				var me = this;
+
+                swal({
+                    title: "Deleted",
+                    text: "ต้องการลบข้อมูลใช่หรือไม่",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.LoadingOverlay("show", {
+                            image       : "",
+                            size        : "60px",
+                            fontawesome : "fa fa-cog fa-spin"
+                        });
+
+                        $.ajax({
+                            type: "POST",
+                            url: "product/deleted",
+                            dataType: "json",
+                            data: { 
+                                _token : window.Laravel.csrfToken,
+                                id: id 
+                            },
+                            error: function() {
+                                $.LoadingOverlay("hide");
+                                
+                                setTimeout(() => {
+                                    swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                                }, 500);
+                            },
+                            success: function (responseData) {
+                                if(responseData.success == true){
+                                    $.LoadingOverlay("hide");   
+
+                                    $('#table_product').DataTable().clear().destroy();
+                                    me.fetch_data();
+
+                                    swal ("SUCCESS", responseData.message, "success");
+                                } else {
+                                    swal ("WARNING", responseData.message, "warning");
+                                }
+                            }				  
+                        });
+                    }
                 });
 
             },

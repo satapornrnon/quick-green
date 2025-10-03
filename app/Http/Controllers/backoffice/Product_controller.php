@@ -84,6 +84,48 @@ class Product_controller extends Controller
         echo json_encode($responseData);
     }
 
+    public function get_detail(Request $request)
+    {
+        $id = $request->input('id');
+
+        $result = DB::table('tbl_product')->where('id', $id)->get();
+        if($result->count() > 0){
+            foreach ($result as $key => $value) {
+                
+                if($value->product_image){
+                    $product_image = '<a href="'. asset('uploads/product/'. $value->product_image) .'" target="_blank">';
+                    $product_image .=     '<img class="img-thumbnail" src="'. asset('uploads/product/'. $value->product_image) .'" alt="Preview image" width="75">';
+                    $product_image .= '</a>';
+                } else {
+                    $product_image = '';
+                }
+
+                if($value->product_cover){
+                    $product_cover = '<a href="'. asset('uploads/product/'. $value->product_cover) .'" target="_blank">';
+                    $product_cover .=     '<img class="img-thumbnail" src="'. asset('uploads/cover/'. $value->product_cover) .'" alt="Preview image" width="175">';
+                    $product_cover .= '</a>';
+                } else {
+                    $product_cover = '';
+                }
+
+                $data = array(
+                    "product_id" => $value->id,
+                    "product_name" => $value->product_name,
+                    "product_description" => $value->product_description,
+                    "product_status" => $value->product_status,
+                    "product_image" => $product_image,
+                    "product_cover" => $product_cover,
+                );
+            }
+        }
+    
+        $responseData = array(
+            "search_data" => $data 
+        );
+    
+        echo json_encode($responseData);
+    }
+
     public function save(Request $request)
     {
         $request->validate([
@@ -133,7 +175,23 @@ class Product_controller extends Controller
         }
     }
 
-    // helper function
+    public function deleted(Request $request)
+    {
+        $id = $request->input('id');
+
+        $data = array(
+            "updated_at" => Config::get('myarrays.current_datetime'),
+            "updated_by" => 0,
+            "deleted" => 1,
+        );
+        $success = DB::table('tbl_product')->where('id', $id)->update($data);
+        if($success){
+            echo json_encode(array("success" => true, 'message' => 'บันทึกข้อมูลเรียบร้อยแล้ว'));
+        } else {
+            echo json_encode(array("success" => false, 'message' => 'เกิดข้อผิดพลาด'));
+        }
+    }
+
     private function _upload_file($field, $path, $prefix){
         if(isset($_FILES[$field]) && $_FILES[$field]['size'] > 0){
             $file_data = move_temp_file($_FILES[$field], $path, $prefix, $_FILES[$field]['tmp_name']);
@@ -141,5 +199,4 @@ class Product_controller extends Controller
         }
         return '';
     }
-
 }

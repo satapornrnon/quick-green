@@ -39,9 +39,6 @@
 	<script>
 		window.Laravel = {
 			csrfToken: "{{ csrf_token() }}",
-			routes: {
-				getDataProduct: "{{ route('get_data_product') }}",
-			}
 		};
 	</script>
 
