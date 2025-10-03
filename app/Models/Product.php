@@ -25,15 +25,4 @@ class Product extends Model
         'updated_by', 
         'deleted'
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (empty($model->product_code)) {
-                $model->product_code = gen_product_code(); // เรียกจาก Helper
-            }
-        });
-    }
 }

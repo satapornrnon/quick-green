@@ -168,7 +168,7 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-30 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
                     <div class="interested-detail-card">
-                        <img src="{{ asset('uploads/product/product-smart-power-sensor.png') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('uploads/system/product-smart-power-sensor.png') }}" class="img-fluid" alt="">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s">

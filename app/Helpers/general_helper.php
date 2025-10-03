@@ -174,34 +174,20 @@ if (!function_exists('gen_interested_code')) {
 
     function gen_interested_code() 
     {
+        $result = DB::table('tbl_interested')->select('interested_code')->orderBy('interested_code', 'DESC')->limit(1)->lockForUpdate()->get();
+        if($result->count() > 0){
+            foreach ($result as $key => $value) {
+                $last_running = (int) substr($value->interested_code, -5);
+            }
+        } else {
+            $last_running = 0;
+        }
 
+        $prefix = 'INT'. date("ym");
+        $new_running = $last_running + 1;
+        $new_interested_code = $prefix . str_pad($new_running, 5, '0', STR_PAD_LEFT);
 
-
-
-        echo 'A1';
-        
-        $ci = app();
-        $ci->load->model('interested'); 
-
-        $sql = "SELECT MAX( SUBSTRING( interested_code, 9 ) ) AS interested_code FROM tbl_interested WHERE created_at LIKE '". date('Y') ."%' ORDER BY id DESC";
-        $interested = $ci->interested_model->get_interested($sql);  
-
-        print_r($interested);
-
-
-        // $sql = "SELECT MAX( SUBSTRING( loan_code, 9 ) ) AS loan_code FROM tbl_loan WHERE created_at LIKE '". date('Y') ."%' ORDER BY id DESC";
-        // $loan = $ci->loan_model->get_loan($sql);
-
-        // if($loan[0]['loan_code'] == ''){
-        //     $loan_no = '00000';
-        // } else {
-        //     $loan_no = $loan[0]['loan_code'];
-        // }
-
-        // $loan_head = 'LOAN'.date("ym");
-        // $data = $loan_head.substr("00000".($loan_no+1), -5); 
-
-        // return $data;
+        return $new_interested_code;
     }
 
 }
@@ -227,9 +213,9 @@ if (!function_exists('gen_product_code')) {
 
         $prefix = 'PRD';
         $new_running = $last_running + 1;
-        $new_order_code = $prefix . str_pad($new_running, 3, '0', STR_PAD_LEFT);
+        $new_product_code = $prefix . str_pad($new_running, 3, '0', STR_PAD_LEFT);
 
-        return $new_order_code;
+        return $new_product_code;
     }
 
 }

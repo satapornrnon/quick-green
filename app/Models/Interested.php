@@ -29,15 +29,4 @@ class Interested extends Model
         'updated_by', 
         'deleted'
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (empty($model->interested_code)) {
-                $model->interested_code = gen_interested_code(); // เรียกจาก Helper
-            }
-        });
-    }
 }

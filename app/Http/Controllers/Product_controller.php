@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Interested;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
-use App\Models\Interested;
+use Illuminate\Support\Facades\DB;
 
 class Product_controller extends Controller
 {
@@ -46,6 +47,7 @@ class Product_controller extends Controller
             'interested_date' => Config::get('myarrays.current_date'),
             'interested_time' => Config::get('myarrays.current_time'),
             'interested_status' => 'pending',
+            'interested_code' => gen_interested_code(),
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'mobile' => str_replace("-", "", $request->input('mobile')),
@@ -54,8 +56,7 @@ class Product_controller extends Controller
             'accept_policy' => $request->input('accept_policy'),
             'created_at' => Config::get('myarrays.current_datetime'),
         ];
-        $success = Interested::create($data_save);
-
+        $success = DB::table('tbl_interested')->insert($data_save);
         if ($success) {
             return response()->json(['status' => true, 'message' => 'บันทึกข้อมูลเรียบร้อยแล้ว']);
         } else {
