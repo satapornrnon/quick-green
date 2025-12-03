@@ -131,8 +131,17 @@ var InterestedModel;
                             $('#interested-form .product_name').html(responseData.search_data.product_name);
                             $('#interested-form .full_name').html(responseData.search_data.full_name);
                             $('#interested-form .mobile').html(responseData.search_data.mobile);
-                            $('#interested-form .interested_status').html(responseData.search_data.interested_status);
+                            $('#interested-form .interested_status').html(responseData.search_data.interested_status_show);
                             $('#interested-form .time_callback').html(responseData.search_data.time_callback);
+
+                            if(responseData.search_data.interested_status == 'pending'){
+                                $("#interested-form select[name=interested_status] option").not('[value="in_progress"]').remove();
+                                $('#interested-form select[name=interested_status]').val('in_progress');
+                                $('#interested-form .form-in-progress').addClass('hidden');
+                            } else {
+                                $("#interested-form option[value='in_progress']").remove();
+                                $('#interested-form .form-in-progress').removeClass('hidden');
+                            }
 
                             $('#interested-form input[name=interested_id]').val(responseData.search_data.interested_id);
 

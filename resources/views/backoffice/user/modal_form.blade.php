@@ -91,7 +91,7 @@
 </div>
 <!-------------------- user modal -------------------->
 
-<!-------------------- user modal -------------------->
+<!-------------------- user view modal -------------------->
 <div class="modal fade bd-example-modal-lg" id="user-view-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -141,4 +141,4 @@
         </div>
     </div>
 </div>
-<!-------------------- user modal -------------------->
+<!-------------------- user view modal -------------------->

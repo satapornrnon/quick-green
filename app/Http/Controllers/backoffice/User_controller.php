@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Logs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -102,6 +103,8 @@ class User_controller extends Controller
                 $data = array(
                     "user_id" => $value->id,
                     "roles_id" => $value->roles_id,
+                    "username" => $value->username,
+                    "password" => $value->password,
                     "first_name" => $value->first_name,
                     "last_name" => $value->last_name,
                     "email" => $value->email,
@@ -146,9 +149,14 @@ class User_controller extends Controller
 
     public function save(Request $request)
     {
+        if(!$request->user_id){
+            $request->validate([
+                'username' => 'required|string|max:255',
+                'password' => 'required|string|min:6',
+            ]);
+        }
+
         $request->validate([
-            'username' => 'required|string|max:255',
-            'password' => 'required|string|min:6',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
@@ -160,8 +168,6 @@ class User_controller extends Controller
 
             $data_save = array(
                 "roles_id" => $request->roles_id,
-                "username" => $request->username,
-                "password" => bcrypt($request->password),
                 "first_name" => $request->first_name,
                 "last_name" => $request->last_name,
                 "email" => $request->email,
@@ -170,15 +176,39 @@ class User_controller extends Controller
             );
 
             if(!$request->user_id){
+                $data_save["username"] = $request->username;
+                $data_save["password"] = bcrypt($request->password);
                 $data_save['created_at'] = Config::get('myarrays.current_datetime');
-                $data_save['created_by'] = auth()->id() ?? 0;
+                $data_save['created_by'] = session('user_id');
 
                 $success = DB::table('tbl_user')->insert($data_save);
             } else {
+                // กรณีแก้ไข
+                // ดึงค่าเดิมใน DB ถ้าไม่ได้ส่งมา
+                $old_user = DB::table('tbl_user')->where('id', $request->user_id)->first();
+
+                $data_save["username"] = $request->username ?? $old_user->username;
+
+                // password: ถ้าไม่กรอกใหม่ ใช้ของเดิม
+                if ($request->password) {
+                    $data_save["password"] = bcrypt($request->password);
+                } else {
+                    $data_save["password"] = $old_user->password;
+                }
+
                 $data_save['updated_at'] = Config::get('myarrays.current_datetime');
-                $data_save['updated_by'] = auth()->id() ?? 0;
+                $data_save['updated_by'] = session('user_id');
 
                 $success = DB::table('tbl_user')->where('id', $request->user_id)->update($data_save);
+            }
+
+            if($success) {
+                $data_log = array(
+                    'subject' => (!$request->user_id) ? 'เพิ่มข้อมูล' : 'แก้ไขข้อมูล', 
+                    'detail' => (!$request->user_id) ? 'เพิ่มข้อมูลผู้ใช้งานระบบ ชื่อ-นามสกุล : '. $request->first_name .' '. $request->last_name : 'แก้ไขข้อมูลผู้ใช้งานระบบ ชื่อ-นามสกุล : '. $request->first_name .' '. $request->last_name, 
+                    'type' => (!$request->user_id) ? 'Insert' : 'Update', 
+                );
+                Logs::writeLog($data_log['subject'], $data_log['detail'], $data_log['type']);
             }
 
             return response()->json([
@@ -199,11 +229,20 @@ class User_controller extends Controller
 
         $data = array(
             "updated_at" => Config::get('myarrays.current_datetime'),
-            "updated_by" => 0,
+            "updated_by" => session('user_id'),
             "deleted" => 1,
         );
         $success = DB::table('tbl_user')->where('id', $id)->update($data);
         if($success){
+            $user = DB::table('tbl_user')->where('id', $id)->first();
+
+            $data_log = array(
+                'subject' => 'ลบข้อมูล', 
+                'detail' => 'ลบข้อมูลผู้ใช้งานระบบ ชื่อ-นามสกุล : '. $user->first_name .' '. $user->last_name, 
+                'type' => 'Deleted', 
+            );
+            Logs::writeLog($data_log['subject'], $data_log['detail'], $data_log['type']);
+            
             echo json_encode(array("success" => true, 'message' => 'บันทึกข้อมูลเรียบร้อยแล้ว'));
         } else {
             echo json_encode(array("success" => false, 'message' => 'เกิดข้อผิดพลาด'));

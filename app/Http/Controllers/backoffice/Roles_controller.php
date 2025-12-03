@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
 use App\Models\Roles;
+use App\Models\Logs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -202,14 +203,23 @@ class Roles_controller extends Controller
 
             if(!$request->roles_id){
                 $data_save['created_at'] = Config::get('myarrays.current_datetime');
-                $data_save['created_by'] = auth()->id() ?? 0;
+                $data_save['created_by'] = session('user_id');
 
                 $success = DB::table('tbl_roles')->insert($data_save);
             } else {
                 $data_save['updated_at'] = Config::get('myarrays.current_datetime');
-                $data_save['updated_by'] = auth()->id() ?? 0;
+                $data_save['updated_by'] = session('user_id');
 
                 $success = DB::table('tbl_roles')->where('id', $request->roles_id)->update($data_save);
+            }
+
+            if($success) {
+                $data_log = array(
+                    'subject' => (!$request->roles_id) ? 'เพิ่มข้อมูล' : 'แก้ไขข้อมูล', 
+                    'detail' => (!$request->roles_id) ? 'เพิ่มข้อมูลสิทธิการใช้งานระบบ บทบาท : '. $request->roles_name : 'แก้ไขข้อมูลสิทธิการใช้งานระบบ บทบาท : '. $request->roles_name, 
+                    'type' => (!$request->roles_id) ? 'Insert' : 'Update', 
+                );
+                Logs::writeLog($data_log['subject'], $data_log['detail'], $data_log['type']);
             }
 
             return response()->json([
@@ -230,11 +240,20 @@ class Roles_controller extends Controller
 
         $data = array(
             "updated_at" => Config::get('myarrays.current_datetime'),
-            "updated_by" => 0,
+            "updated_by" => session('user_id'),
             "deleted" => 1,
         );
         $success = DB::table('tbl_roles')->where('id', $id)->update($data);
         if($success){
+            $roles = DB::table('tbl_roles')->where('id', $id)->first();
+
+            $data_log = array(
+                'subject' => 'ลบข้อมูล', 
+                'detail' => 'ลบข้อมูลสิทธิการใช้งานระบบ บทบาท : '. $roles->roles_name, 
+                'type' => 'Deleted', 
+            );
+            Logs::writeLog($data_log['subject'], $data_log['detail'], $data_log['type']);
+
             echo json_encode(array("success" => true, 'message' => 'บันทึกข้อมูลเรียบร้อยแล้ว'));
         } else {
             echo json_encode(array("success" => false, 'message' => 'เกิดข้อผิดพลาด'));

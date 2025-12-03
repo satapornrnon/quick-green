@@ -63,6 +63,13 @@ class Settings_controller extends Controller
             Settings::set('company_telephone', $request->company_telephone);
             Settings::set('company_email', $request->company_email);
 
+            $data_log = array(
+                'subject' => 'แก้ไขข้อมูล', 
+                'detail' => 'แก้ไขข้อมูลตั้งค่าทั่วไป', 
+                'type' => 'Update', 
+            );
+            Logs::writeLog($data_log['subject'], $data_log['detail'], $data_log['type']);
+
             return response()->json([
                 'success' => true,
                 'message' => 'บันทึกข้อมูลเรียบร้อยแล้ว'

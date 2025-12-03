@@ -52,13 +52,16 @@
                                     <label for="interested_status">สถานะ :</label>
                                     <select class="form-control form-control-sm" id="interested_status" name="interested_status" data-rule-required="true" data-msg-required="กรุณาเลือกสถานะ">
                                         <option value="" selected disabled>เลือกสถานะ</option>
+                                        <option value="in_progress">กำลังดำเนินการ</option>
                                         <option value="completed">เสร็จสิ้น</option>
                                         <option value="cancelled">ยกเลิก</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="remark">หมายเหตุ :</label>
-                                    <textarea class="form-control" id="remark" name="remark"></textarea>
+                                <div class="form-in-progress hidden">
+                                    <div class="form-group">
+                                        <label for="remark">หมายเหตุ :</label>
+                                        <textarea class="form-control" id="remark" name="remark"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>

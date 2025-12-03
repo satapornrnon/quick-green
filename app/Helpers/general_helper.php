@@ -241,6 +241,8 @@ if ( ! function_exists('get_interested_label')){
     {        
         if($interested_status == 'pending'){
             $data = "<span class='badge bg-warning'>รอดำเนินการ</span>";
+        } else if($interested_status == 'in_progress'){
+            $data = "<span class='badge bg-primary'>กำลังดำเนินการ</span>";
         } else if($interested_status == 'completed'){
             $data = "<span class='badge bg-success'>เสร็จสิ้น</span>";
         } else if($interested_status == 'cancelled'){
