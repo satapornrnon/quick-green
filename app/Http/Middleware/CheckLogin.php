@@ -20,7 +20,5 @@ class CheckLogin
         if (!session('is_logged_in')) {
             return redirect('/backoffice/login');
         }
-
-        return $next($request);
     }
 }

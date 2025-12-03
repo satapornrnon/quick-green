@@ -43,7 +43,6 @@ Route::get('/contact-us', [Frontend_contact_us_controller::class, 'index'])->nam
 
 //======== Backoffice ========//
 Route::prefix('backoffice')->group(function () {
-    Route::get('/', [Backend_dashboard_controller::class, 'index'])->name('dashboard');
 
     // ================= Login ไม่ต้องใช้ auth =================
     Route::prefix('login')->group(function () {
@@ -58,6 +57,7 @@ Route::prefix('backoffice')->group(function () {
 
     // ================= ส่วนที่ต้อง Login เท่านั้น =================
     Route::middleware('checklogin')->group(function () {
+        Route::get('/', [Backend_dashboard_controller::class, 'index'])->name('dashboard');
         
         Route::prefix('dashboard')->group(function () {
             Route::get('/', [Backend_dashboard_controller::class, 'index'])->name('dashboard');
