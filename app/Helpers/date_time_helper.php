@@ -68,4 +68,22 @@ if ( ! function_exists('datethaishort')){
 		return "$strDay $strMonthThai $strYear";
 	}
 }
+
+/**
+ * use this data format
+ * 
+ * @param string $uri
+ * @return full url of the given file path
+ */
+// ------------------------------------------------------------------------
+if ( ! function_exists('timethai')){
+	function timethai($strtime){
+
+		$strHour	= date("H",strtotime($strtime));
+		$strMinute	= date("i",strtotime($strtime));
+		$strSeconds	= date("s",strtotime($strtime));
+
+		return "$strHour:$strMinute:$strSeconds";
+	}
+}
 ?>

@@ -134,7 +134,7 @@
                             <img src="{{ asset('uploads/system/icon-service-process-2.png') }}" class="img-fluid" alt="">
                         </div>
                         <div class="content">
-                            <h5>ติดตั้งระบบ</h5>
+                            <h5 class="title">ติดตั้งระบบ</h5>
                             <span>QUICK GREEN ติดตังระบบโดยทีมงานมือ อาชีพ ออกแบบเฉพาะตามการใช้งานจริง ใช้ อุปกรณ์คุณภาพสูง เพือให้ลูกค้าทุกคนมันใจใน ความคุ้มค่าและประสิทธิภาพระยะยาว</span>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                             <img src="{{ asset('uploads/system/icon-service-process-3.png') }}" class="img-fluid" alt="">
                         </div>
                         <div class="content">
-                            <h5>บริการหลังการขาย</h5>
+                            <h5 class="title">บริการหลังการขาย</h5>
                             <span> QUICK GREEN พร้อมดูแลหลังการติดตัง ด้วย บริการตรวจเช็คระบบ บํารุงรักษา ให้คําปรึกษา และซัพพอร์ตตลอดการใช้งาน เพือให้คุณมันใจว่า ระบบ Solar Cell ของคุณจะทํางานได้ดีตลอดไป</span>
                         </div>
                     </div>

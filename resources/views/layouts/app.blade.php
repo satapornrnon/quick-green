@@ -34,6 +34,14 @@
 			asset('js/global.js'),
 		));
     ?>
+
+	<script>
+		$(window).on('load', function() {
+			$('#preloader').fadeOut(500, function() {
+				$(this).remove();
+			});
+		});
+	</script>
 </head>
 <body>
 

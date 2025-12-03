@@ -20,7 +20,45 @@
             </div>
 
             <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-items-center justify-content-between">    
+                                <h5 class="card-title">ผู้ใช้งาน</h5>
+
+                                <button type="button" class="btn btn-sm btn-info btn-icon-split add_modal" data-toggle="modal" name="btn-add-user" data-title="เพิ่มผู้ใช้งาน">
+                                    <span class="icon text-white-50"><i class="fa fa-plus"></i></span>
+                                    <span class="text">เพิ่มผู้ใช้งาน</span>
+                                </button>
+                            </div>
+
+                            <div class="table-responsive" style="overflow-y: auto;">
+                                <table class="table table-hover display nowrap" id="table_user">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th scope="col"><i class="fa fa-bars"></i></th>
+                                            <th scope="col">ลำดับ</th>
+                                            <th scope="col">ชื่อ-นามสกุล</th>
+                                            <th scope="col">อีเมล</th>
+                                            <th scope="col">ประเภทผู้ใช้งานระบบ</th>
+                                            <th scope="col">สิทธิการผู้ใช้งาน</th>
+                                            <th scope="col">สถานะ</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    @include('backoffice.user.modal_form')
+
+    <?php
+        load_js(array(
+            asset('js/backoffice/user.js'),
+        ));
+    ?>
 @endsection

@@ -243,10 +243,39 @@ if ( ! function_exists('get_interested_label')){
             $data = "<span class='badge bg-warning'>รอดำเนินการ</span>";
         } else if($interested_status == 'completed'){
             $data = "<span class='badge bg-success'>เสร็จสิ้น</span>";
+        } else if($interested_status == 'cancelled'){
+            $data = "<span class='badge bg-danger'>ยกเลิก</span>";
         }
 
         return $data;
     }
 
+}
+
+// ------------------------------------------------------------------------
+if ( ! function_exists('get_user_status_label')){
+
+    function get_user_status_label($user_status)
+    {        
+        if($user_status == 'active'){
+            $data = "<span class='badge bg-success'>กำลังทำงาน</span>";
+        } else if($user_status == 'inactive'){
+            $data = "<span class='badge bg-danger'>ยกเลิกการทำงาน</span>";
+        }
+
+        return $data;
+    }
+
+}
+
+// ------------------------------------------------------------------------
+if ( ! function_exists('renderButton')){
+    function render_button($type, $class, $id, $title, $icon, $status = null)
+    {
+        $statusAttr = $status ? ' data-post-status="' . $status . '"' : '';
+        $button = '<button type="button" class="btn btn-sm btn-outline-' . $type . ' mx-1 ' . $class . '" data-post-id="' . $id . '"' . $statusAttr . ' title="' . $title . '" data-title="' . $title . '"><i class="' . $icon . '"></i></button>';
+
+        return $button;
+    }
 }
 ?>

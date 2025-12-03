@@ -21,7 +21,7 @@ var ProductModel;
                 $('button[name=btn-add-product]').click(function(){
                     var title = $(this).data('title');
 
-                    me.clear_data_form();
+                    me.clear_data_modal();
                     
                     $("#product-form .modal-title").html('');	
                     $("#product-form .modal-title").html(title);
@@ -65,6 +65,12 @@ var ProductModel;
             fetch_data : function(){
                 var me = this;
 
+                $.LoadingOverlay("show", {
+                    image       : "",
+                    size        : "60px",
+                    fontawesome : "fa fa-spinner fa-spin"
+                });
+
                 var table = $('#table_product').DataTable({
 					"processing": true,
 					"serverSide": true,
@@ -91,6 +97,7 @@ var ProductModel;
 							$("#table_product_processing").css("display","none");
 						},
                         complete: function(){
+                            $.LoadingOverlay("hide");
                         }
 					}
 				});
@@ -107,6 +114,12 @@ var ProductModel;
             get_detail : function(id, title){
 				var me = this;
 
+                $.LoadingOverlay("show", {
+                    image       : "",
+                    size        : "60px",
+                    fontawesome : "fa fa-spinner fa-spin"
+                });
+
 				$.ajax({
 					type: "POST",
                     url: "product/get_detail",
@@ -116,10 +129,16 @@ var ProductModel;
 						'id' : id, 
 					},
                     error: function() {
-                        swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                        $.LoadingOverlay("hide");
+                        
+                        setTimeout(() => {
+                            swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                        }, 500);
                     },
 					success: function (responseData) {
-                        me.clear_data_form();
+                        $.LoadingOverlay("hide");
+
+                        me.clear_data_modal();
                         
                         $("#product-form .modal-title").html('');	
                         $("#product-form .modal-title").html(title);
@@ -203,6 +222,12 @@ var ProductModel;
                     if (!$("#product-form").valid()) {
                         return false;
                     }
+
+                    $.LoadingOverlay("show", {
+                        image       : "",
+                        size        : "60px",
+                        fontawesome : "fa fa-spinner fa-spin"
+                    });
                     
 					var formdata = new FormData(this);
 	
@@ -216,9 +241,15 @@ var ProductModel;
 						cache: false,
 						processData: false,	
                         error: function() {
-                            swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                            $.LoadingOverlay("hide");
+
+                            setTimeout(() => {
+                                swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                            }, 500);
                         },			
 						success: function(response){
+                            $.LoadingOverlay("hide");
+                            
                             if(response.success == true){
                                 $('#product-modal').modal('hide');
 
@@ -238,7 +269,7 @@ var ProductModel;
 
             },
 
-            clear_data_form : function() {
+            clear_data_modal : function() {
                 var me = this;
 
                 $('#product-form input[name=product_name]').val('');

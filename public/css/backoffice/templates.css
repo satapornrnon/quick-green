@@ -46,37 +46,46 @@
     font-weight: 400;
 }
 
+/* Pending */
 .page-content .interested-pending-card {
     color: #ffa426;
 }
-
 .page-content .interested-pending-card .card-icon {
     color: #ffa426;
-    background: #ffecdf;
+    background: #fff1e0;
 }
 
-.page-content .interested-callback-card {
-    color: #6777EF;
+/* In Progress */
+.page-content .interested-in_progress-card {
+    color: #6777ef;
 }
-
-.page-content .interested-callback-card .card-icon {
-    color: #6777EF;
+.page-content .interested-in_progress-card .card-icon {
+    color: #6777ef;
     background: #e7eaff;
 }
 
+/* Completed */
 .page-content .interested-completed-card {
     color: #2eca6a;
 }
-
 .page-content .interested-completed-card .card-icon {
     color: #2eca6a;
     background: #e0f8e9;
 }
 
+/* Cancelled */
+.page-content .interested-cancelled-card {
+    color: #e74c3c; /* ปรับเป็นสีแดงเพื่อสื่อความหมาย */
+}
+.page-content .interested-cancelled-card .card-icon {
+    color: #e74c3c;
+    background: #fdecea; /* แดงอ่อน อ่านง่าย */
+}
+
+/* All */
 .page-content .interested-all-card {
     color: #757575;
 }
-
 .page-content .interested-all-card .card-icon {
     color: #757575;
     background: #efefef;
@@ -96,4 +105,26 @@
     font-weight: 700;
     margin: 0;
     padding: 0;
+}
+
+.page-content .nav-settings .settings-link {
+    padding: 15px;
+    color: #212529;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.page-content .nav-settings .settings-link:not(:last-child) {
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.page-content .nav-settings .settings-link:hover {
+    color: var(--color-primary-green);
+}
+
+.page-content .nav-settings .settings-link.active {
+    background-color: var(--background-color-green);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 10px;
 }

@@ -42,7 +42,8 @@
         "files": [
             "app/Helpers/app_files_helper.php",
             "app/Helpers/date_time_helper.php",
-            "app/Helpers/general_helper.php"
+            "app/Helpers/general_helper.php",
+            "app/Helpers/setting_helper.php"
         ]
     },
     "autoload-dev": {

@@ -41,11 +41,9 @@
                     <label for="time_callback">ช่วงเวลาที่สะดวกให้ติดต่อกลับ<span class="required">*</span></label>
                     <select class="form-control" id="time_callback" name="time_callback" data-rule-required="true" data-msg-required="กรุณาเลือกช่วงเวลาที่สะดวก">
                         <option value="" selected>เลือกช่วงเวลา</option>
-                        <?php
-                            foreach (config('myarrays.time_callback') as $key => $value) {
-                                echo '<option value="'. $key .'">'. $value .'</option>';
-                            }
-                        ?>
+                        @foreach(config('myarrays.time_callback') as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

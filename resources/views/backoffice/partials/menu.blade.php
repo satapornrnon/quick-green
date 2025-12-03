@@ -3,18 +3,31 @@ $sidebar_menu = array();
 
 $general_menu[] = array("name" => "แดชบอร์ด", "source" => "dashboard_controller", "class" => "fa-solid fa-house", "url" => route('dashboard'));
 
-$report_dropdown_menu = array(
-    array("name" => "รายงานลงทะเบียน (ทั้งหมด)", "source" => "interested_controller", "url" => route('interested')),
-);
-$general_menu[] = array("name" => "รายงานลงทะเบียน", "source" => "interested_controller", "class" => "fa-solid fa-book-open", "url" => "", "dropdown_menu" => $report_dropdown_menu);
+if(get_check_roles('can_view_interested') == 1){
+    $report_dropdown_menu = array(
+        array("name" => "รายงานลงทะเบียน (ทั้งหมด)", "source" => "interested_controller", "url" => route('interested')),
+    );
+    $general_menu[] = array("name" => "รายงานลงทะเบียน", "source" => "interested_controller", "class" => "fa-solid fa-book-open", "url" => "", "dropdown_menu" => $report_dropdown_menu);
+}
 
-$general_menu[] = array("name" => "ผลิตภัณฑ์", "source" => "product_controller", "class" => "fa-brands fa-product-hunt", "url" => route('product'));
+if(get_check_roles('can_view_product') == 1){
+    $general_menu[] = array("name" => "ผลิตภัณฑ์", "source" => "product_controller", "class" => "fa-brands fa-product-hunt", "url" => route('product'));
+}
 
 $sidebar_menu[] = array("name" => 'general', "subject_menu" => $general_menu);
 
-$setting_menu[] = array("name" => "สิทธิการใช้งาน", "source" => "roles_controller", "class" => "fa-solid fa-user-tag", "url" => route('roles'));
-$setting_menu[] = array("name" => "ผู้ใช้งาน", "source" => "user_controller", "class" => "fa-solid fa-users", "url" => route('user'));
-$setting_menu[] = array("name" => "ตั้งค่า", "source" => "setting_controller", "class" => "fa-solid fa-gears", "url" => route('setting'));
+if(get_check_roles('can_view_roles') == 1){
+    $setting_menu[] = array("name" => "สิทธิการใช้งาน", "source" => "roles_controller", "class" => "fa-solid fa-user-tag", "url" => route('roles'));
+}
+
+if(get_check_roles('can_view_user') == 1){
+    $setting_menu[] = array("name" => "ผู้ใช้งานระบบ", "source" => "user_controller", "class" => "fa-solid fa-users", "url" => route('user'));
+}
+
+if(get_check_roles('can_view_setting') == 1){
+    $setting_menu[] = array("name" => "ตั้งค่าระบบ", "source" => "settings_controller", "class" => "fa-solid fa-gears", "url" => route('settings'));
+}
+
 $sidebar_menu[] = array("name" => 'settings', "subject_menu" => $setting_menu);
 ?>
 

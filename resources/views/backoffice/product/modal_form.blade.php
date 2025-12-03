@@ -67,8 +67,14 @@
                 <div class="modal-footer">
                     <input type="hidden" class="form-control form-control-sm" id="product_id" name="product_id">
 
-                    <button type="submit" class="btn btn-success" name="submit">ยืนยัน</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
+                    <button type="submit" class="btn btn-sm btn-success btn-icon-split" name="submit">
+                        <span class="icon text-white-50"><i class="fa-regular fa-circle-check"></i></span>
+                        <span class="text">ยืนยัน</span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-secondary btn-icon-split" data-bs-dismiss="modal">
+                        <span class="icon text-white-50"><i class="fa-regular fa-circle-xmark"></i></span>
+                        <span class="text">ยกเลิก</span>
+                    </button>
                 </div>
             </form>
         </div>

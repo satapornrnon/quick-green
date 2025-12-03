@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Interested extends Model
 {
@@ -32,4 +33,17 @@ class Interested extends Model
         'updated_by', 
         'deleted'
     ];
+
+    public static function get_data_dashboard()
+    {
+        $data = array();
+
+        $data['count_all'] = DB::table('tbl_interested')->where('deleted', 0)->count();
+        $data['count_pending'] = DB::table('tbl_interested')->where('deleted', 0)->where('interested_status', '=', "pending")->count();
+        $data['count_in_progress'] = DB::table('tbl_interested')->where('deleted', 0)->where('interested_status', '=', "in_progress")->count();
+        $data['count_completed'] = DB::table('tbl_interested')->where('deleted', 0)->where('interested_status', '=', "completed")->count();
+        $data['count_cancelled'] = DB::table('tbl_interested')->where('deleted', 0)->where('interested_status', '=', "cancelled")->count();
+
+        return $data;
+    }
 }

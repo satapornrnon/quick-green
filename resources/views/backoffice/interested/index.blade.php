@@ -51,6 +51,8 @@
         </div>
     </div>
 
+    @include('backoffice.interested.modal_form')
+
     <?php
         load_js(array(
             asset('js/backoffice/interested.js'),

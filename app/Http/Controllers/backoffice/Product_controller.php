@@ -60,8 +60,12 @@ class Product_controller extends Controller
             $product_cover = $value->product_cover ? '<img class="img-thumbnail" src="'. asset('uploads/cover/'. $value->product_cover) .'" width="125">' : '';
 
             $modal_edit  = '';
-            $modal_edit .= '<button type="button" class="btn btn-sm btn-outline-warning mx-1 edit_modal" data-post-id="'. $value->id .'" title="แก้ไขผลิตภัณฑ์สินเชื่อ" data-title="แก้ไขผลิตภัณฑ์สินเชื่อ"><i class="far fa-edit"></i></button>';
-            $modal_edit .= '<button type="button" class="btn btn-sm btn-outline-danger mx-1 cancel_modal" data-post-id="'. $value->id .'" title="ลบ"><i class="far fa-trash-alt"></i></button>';
+            if(get_check_roles('can_edit_product') == 1){
+                $modal_edit .= render_button('warning', 'edit_modal', $value->id, 'แก้ไขผลิตภัณฑ์สินเชื่อ', 'far fa-edit');
+            }
+            if(get_check_roles('can_deleted_product') == 1){
+                $modal_edit .= render_button('danger', 'cancel_modal', $value->id, 'ลบ', 'far fa-trash-alt');
+            }
 
             $data[] = [
                 $modal_edit,

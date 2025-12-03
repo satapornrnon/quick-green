@@ -30,7 +30,7 @@
                                     <i class="fas fa-clock"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>145</h6>
+                                    <h6></h6>
                                     <span class="text-muted small pt-2 ps-1">รายการ</span>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                    <div class="card info-card interested-callback-card">
+                    <div class="card info-card interested-in_progress-card">
                         <div class="card-body">
                             <h5 class="card-title">ลงทะเบียน <span>| กำลังติดต่อกลับ</span></h5>
 
@@ -47,7 +47,7 @@
                                     <i class="fa-solid fa-headset"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>145</h6>
+                                    <h6></h6>
                                     <span class="text-muted small pt-2 ps-1">รายการ</span>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                     <i class="fa-solid fa-check"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>145</h6>
+                                    <h6></h6>
                                     <span class="text-muted small pt-2 ps-1">รายการ</span>
                                 </div>
                             </div>
@@ -72,6 +72,23 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <div class="card info-card interested-cancelled-card">
+                        <div class="card-body">
+                            <h5 class="card-title">ลงทะเบียน <span>| ยกเลิก</span></h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6></h6>
+                                    <span class="text-muted small pt-2 ps-1">รายการ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div class="card info-card interested-all-card">
                         <div class="card-body">
                             <h5 class="card-title">ลงทะเบียน <span>| ทั้งหมด</span></h5>
@@ -81,7 +98,7 @@
                                     <i class="fa-solid fa-book"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>145</h6>
+                                    <h6></h6>
                                     <span class="text-muted small pt-2 ps-1">รายการ</span>
                                 </div>
                             </div>
@@ -91,4 +108,10 @@
             </div>
         </div>
     </div>
+
+    <?php
+        load_js(array(
+            asset('js/backoffice/dashboard.js'),
+        ));
+    ?>
 @endsection

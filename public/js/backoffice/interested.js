@@ -10,7 +10,7 @@ var InterestedModel;
 
             init: function(){
                 this.initInterested();
-                // this.initInterestedSubmit();
+                this.initInterestedSubmit();
             },
 
             initInterested : function(){
@@ -21,7 +21,7 @@ var InterestedModel;
                 // $('button[name=btn-add-interested]').click(function(){
                 //     var title = $(this).data('title');
 
-                //     me.clear_data_form();
+                //     me.clear_data_modal();
                     
                 //     $("#interested-form .modal-title").html('');	
                 //     $("#interested-form .modal-title").html(title);
@@ -29,21 +29,31 @@ var InterestedModel;
                 //     $('#interested-modal').modal('show');	
                 // });
 
-                // $('#table_interested tbody').on('click', '.edit_modal', function () {
-                //     var id = $(this).data('post-id');
-                //     var title = $(this).data('title');
-                //     me.get_detail(id, title);
-                // });
+                $('#table_interested tbody').on('click', '.edit_modal', function () {
+                    var id = $(this).data('post-id');
+                    me.get_detail(id, title);
+                });
 
-                // $('#table_interested tbody').on('click', '.cancel_modal', function () {
-                //     var id = $(this).data('post-id');
-                //     me.deleted(id);
-                // });
+                $('#table_interested tbody').on('click', '.view_modal', function () {
+                    var id = $(this).data('post-id');
+                    me.get_view_detail(id, title);
+                });
+
+                $('#table_interested tbody').on('click', '.cancel_modal', function () {
+                    var id = $(this).data('post-id');
+                    me.deleted(id);
+                });
 
             },
 
             fetch_data : function(){
                 var me = this;
+
+                $.LoadingOverlay("show", {
+                    image       : "",
+                    size        : "60px",
+                    fontawesome : "fa fa-spinner fa-spin"
+                });
 
                 var table = $('#table_interested').DataTable({
 					"processing": true,
@@ -71,6 +81,7 @@ var InterestedModel;
 							$("#table_interested_processing").css("display","none");
 						},
                         complete: function(){
+                            $.LoadingOverlay("hide");
                         }
 					}
 				});
@@ -84,164 +95,239 @@ var InterestedModel;
 
             },
 
-            // get_detail : function(id, title){
-			// 	var me = this;
+            get_detail : function(id){
+				var me = this;
 
-			// 	$.ajax({
-			// 		type: "POST",
-            //         url: "interested/get_detail",
-			// 		dataType: "json",
-			// 		data: {
-            //             '_token' : window.Laravel.csrfToken,
-			// 			'id' : id, 
-			// 		},
-            //         error: function() {
-            //             swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
-            //         },
-			// 		success: function (responseData) {
-            //             me.clear_data_form();
+                $.LoadingOverlay("show", {
+                    image       : "",
+                    size        : "60px",
+                    fontawesome : "fa fa-spinner fa-spin"
+                });
+
+				$.ajax({
+					type: "POST",
+                    url: "interested/get_detail",
+					dataType: "json",
+					data: {
+                        '_token' : window.Laravel.csrfToken,
+						'id' : id, 
+					},
+                    error: function() {
+                        $.LoadingOverlay("hide");
                         
-            //             $("#interested-form .modal-title").html('');	
-            //             $("#interested-form .modal-title").html(title);
+                        setTimeout(() => {
+                            swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                        }, 500);
+                    },
+					success: function (responseData) {
+                        $.LoadingOverlay("hide");
 
-            //             if(responseData.search_data != null){
+                        me.clear_edit_modal();
+
+                        if(responseData.search_data != null){
                             
-            //                 $('#interested-form input[name=interested_name]').val(responseData.search_data.interested_name);
-            //                 $('#interested-form textarea[name=interested_description]').val(responseData.search_data.interested_description);
-            //                 $("#interested-form input[name=interested_status][value="+ responseData.search_data.interested_status +"]").prop("checked",true);
-            //                 $('#interested-form .preview-interested-image').html(responseData.search_data.interested_image);
-            //                 $('#interested-form .preview-interested-cover').html(responseData.search_data.interested_cover);
+                            $('#interested-form .datetime').html(responseData.search_data.datetime);
+                            $('#interested-form .interested_code').html(responseData.search_data.interested_code);
+                            $('#interested-form .product_name').html(responseData.search_data.product_name);
+                            $('#interested-form .full_name').html(responseData.search_data.full_name);
+                            $('#interested-form .mobile').html(responseData.search_data.mobile);
+                            $('#interested-form .interested_status').html(responseData.search_data.interested_status);
+                            $('#interested-form .time_callback').html(responseData.search_data.time_callback);
 
-            //                 $('#interested-form input[name=interested_id]').val(responseData.search_data.interested_id);
+                            $('#interested-form input[name=interested_id]').val(responseData.search_data.interested_id);
 
-            //                 $('#interested-modal').modal('show');	
-            //             }
+                            $('#interested-modal').modal('show');	
+                        }
                         
-			// 		}				  
-			// 	});
+					}				  
+				});
 
-            // },
+            },
 
-            // deleted : function(id){
-			// 	var me = this;
+            get_view_detail : function(id){
+				var me = this;
 
-            //     swal({
-            //         title: "Deleted",
-            //         text: "ต้องการลบข้อมูลใช่หรือไม่",
-            //         icon: "warning",
-            //         buttons: true,
-            //         dangerMode: true,
-            //     })
-            //     .then((willDelete) => {
-            //         if (willDelete) {
-            //             $.LoadingOverlay("show", {
-            //                 image       : "",
-            //                 size        : "60px",
-            //                 fontawesome : "fa fa-cog fa-spin"
-            //             });
+                $.LoadingOverlay("show", {
+                    image       : "",
+                    size        : "60px",
+                    fontawesome : "fa fa-spinner fa-spin"
+                });
 
-            //             $.ajax({
-            //                 type: "POST",
-            //                 url: "interested/deleted",
-            //                 dataType: "json",
-            //                 data: { 
-            //                     _token : window.Laravel.csrfToken,
-            //                     id: id 
-            //                 },
-            //                 error: function() {
-            //                     $.LoadingOverlay("hide");
+				$.ajax({
+					type: "POST",
+                    url: "interested/get_detail",
+					dataType: "json",
+					data: {
+                        '_token' : window.Laravel.csrfToken,
+						'id' : id, 
+					},
+                    error: function() {
+                        $.LoadingOverlay("hide");
+                        
+                        setTimeout(() => {
+                            swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                        }, 500);
+                    },
+					success: function (responseData) {
+                        $.LoadingOverlay("hide");
+                        
+                        me.clear_view_modal();
+
+                        if(responseData.search_data != null){
+                            $('#interested-view-form .datetime').html(responseData.search_data.datetime);
+                            $('#interested-view-form .interested_code').html(responseData.search_data.interested_code);
+                            $('#interested-view-form .product_name').html(responseData.search_data.product_name);
+                            $('#interested-view-form .full_name').html(responseData.search_data.full_name);
+                            $('#interested-view-form .mobile').html(responseData.search_data.mobile);
+                            $('#interested-view-form .interested_status').html(responseData.search_data.interested_status);
+                            $('#interested-view-form .time_callback').html(responseData.search_data.time_callback);
+                            $('#interested-view-form .remark').html(responseData.search_data.remark);
+
+                            $('#interested-view-modal').modal('show');	
+                        }
+                        
+					}				  
+				});
+
+            },
+
+            deleted : function(id){
+				var me = this;
+
+                swal({
+                    title: "Deleted",
+                    text: "ต้องการลบข้อมูลใช่หรือไม่",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.LoadingOverlay("show", {
+                            image       : "",
+                            size        : "60px",
+                            fontawesome : "fa fa-cog fa-spin"
+                        });
+
+                        $.ajax({
+                            type: "POST",
+                            url: "interested/deleted",
+                            dataType: "json",
+                            data: { 
+                                _token : window.Laravel.csrfToken,
+                                id: id 
+                            },
+                            error: function() {
+                                $.LoadingOverlay("hide");
                                 
-            //                     setTimeout(() => {
-            //                         swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
-            //                     }, 500);
-            //                 },
-            //                 success: function (responseData) {
-            //                     if(responseData.success == true){
-            //                         $.LoadingOverlay("hide");   
+                                setTimeout(() => {
+                                    swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                                }, 500);
+                            },
+                            success: function (responseData) {
+                                if(responseData.success == true){
+                                    $.LoadingOverlay("hide");   
 
-            //                         $('#table_interested').DataTable().clear().destroy();
-            //                         me.fetch_data();
+                                    $('#table_interested').DataTable().clear().destroy();
+                                    me.fetch_data();
 
-            //                         swal ("SUCCESS", responseData.message, "success");
-            //                     } else {
-            //                         swal ("WARNING", responseData.message, "warning");
-            //                     }
-            //                 }				  
-            //             });
-            //         }
-            //     });
+                                    swal ("SUCCESS", responseData.message, "success");
+                                } else {
+                                    swal ("WARNING", responseData.message, "warning");
+                                }
+                            }				  
+                        });
+                    }
+                });
 
-            // },
+            },
 
-            // initInterestedSubmit : function(){
-            //     var me = this;
+            initInterestedSubmit : function(){
+                var me = this;
 
-            //     $("#interested-form").validate({});
+                $("#interested-form").validate({});
                 
-            //     $('#interested-form').submit(function(e) {
+                $('#interested-form').submit(function(e) {
 
-            //         if (!$("#interested-form").valid()) {
-            //             return false;
-            //         }
+                    if (!$("#interested-form").valid()) {
+                        return false;
+                    }
+
+                    $.LoadingOverlay("show", {
+                        image       : "",
+                        size        : "60px",
+                        fontawesome : "fa fa-spinner fa-spin"
+                    });
                     
-			// 		var formdata = new FormData(this);
+					var formdata = new FormData(this);
 	
-			// 		$.ajax({
-			// 			url: "interested/save",
-			// 			type: "POST",
-			// 			data: formdata,
-			// 			dataType: "json",
-			// 			mimeTypes:"multipart/form-data",
-			// 			contentType: false,
-			// 			cache: false,
-			// 			processData: false,	
-            //             error: function() {
-            //                 swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
-            //             },			
-			// 			success: function(response){
-            //                 if(response.success == true){
-            //                     $('#interested-modal').modal('hide');
+					$.ajax({
+						url: "interested/save",
+						type: "POST",
+						data: formdata,
+						dataType: "json",
+						mimeTypes:"multipart/form-data",
+						contentType: false,
+						cache: false,
+						processData: false,	
+                        error: function() {
+                            $.LoadingOverlay("hide");
 
-            //                     $('#table_interested').DataTable().clear().destroy();
-            //                     me.fetch_data();
+                            setTimeout(() => {
+                                swal ("ERROR" , "เกิดข้อผิดพลาด" , "error");
+                            }, 500);
+                        },			
+						success: function(response){
+                            $.LoadingOverlay("hide");
+                            
+                            if(response.success == true){
+                                $('#interested-modal').modal('hide');
+
+                                $('#table_interested').DataTable().clear().destroy();
+                                me.fetch_data();
                                 
-            //                     swal("SUCCESS", response.message, "success");
-            //                 } else {
-            //                     swal ("WARNING", response.message, "warning");
-            //                 }
-			// 			}
-			// 		});
+                                swal("SUCCESS", response.message, "success");
+                            } else {
+                                swal ("WARNING", response.message, "warning");
+                            }
+						}
+					});
 
-			// 		e.preventDefault();
+					e.preventDefault();
 
-			// 	});
+				});
 
-            // },
+            },
 
-            // clear_data_form : function() {
-            //     var me = this;
+            clear_edit_modal : function() {
+                var me = this;
 
-            //     $('#interested-form input[name=interested_name]').val('');
-            //     $('#interested-form textarea[name=interested_description]').val('');
-            //     $("#interested-form input[name=interested_status]").prop("checked", false);
-                
-            //     me.clear_data_image();
+                $('#interested-form .datetime').html('');
+                $('#interested-form .interested_code').html('');
+                $('#interested-form .product_name').html('');
+                $('#interested-form .full_name').html('');
+                $('#interested-form .mobile').html('');
+                $('#interested-form .interested_status').html('');
+                $('#interested-form .time_callback').html('');
 
-            //     $('#interested-form input[name=interested_id]').val('');
-            // },
+                $('#interested-form select[name=interested_status]').val('');
+                $('#interested-form textarea[name=remark]').val('');
 
-            // clear_data_image : function() {
-            //     var me = this;
+                $('#interested-form input[name=interested_id]').val('');
+            },
 
-            //     $('#interested-form .preview-interested-image').html('');
-            //     $('#interested-form input[name=interested_image]').val('');
-            //     $('#interested-form input[name=interested_image_name]').val('');
+            clear_view_modal : function() {
+                var me = this;
 
-            //     $('#interested-form .preview-interested-cover').html('');
-            //     $('#interested-form input[name=interested_cover]').val('');
-            //     $('#interested-form input[name=interested_cover_name]').val('');
-            // }
-
+                $('#interested-view-form .datetime').html('');
+                $('#interested-view-form .interested_code').html('');
+                $('#interested-view-form .product_name').html('');
+                $('#interested-view-form .full_name').html('');
+                $('#interested-view-form .mobile').html('');
+                $('#interested-view-form .interested_status').html('');
+                $('#interested-view-form .time_callback').html('');
+                $('#interested-view-form .remark').html('');
+            },
         }
 
     }());

@@ -33,6 +33,10 @@ menu, ol, ul {
     padding: 0;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .text-green {
     color: var(--color-primary-green);
 }
@@ -53,6 +57,10 @@ menu, ol, ul {
     position: absolute;
 }
 
+.form-control {
+    appearance: auto;
+}
+
 .form-control:focus {
     border-color: var(--background-color-green);
     -webkit-box-shadow: 0 0 0 0.2rem rgba(218, 77, 77, 0.25);
@@ -67,6 +75,15 @@ menu, ol, ul {
 
 .form-group {
     margin-bottom: 0.5rem;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .2rem;
+}
+
+textarea.form-control {
+    height: auto;
 }
 
 .overflow-x-clip {
@@ -151,6 +168,10 @@ menu, ol, ul {
     color: #fff;
 }
 
+.table th, .table td {
+    padding: 0.75rem;
+}
+
 table.dataTable thead th {
     text-align: center;
 }
@@ -186,3 +207,12 @@ table.dataTable tfoot th.column_right{
 }
 /* ------------------------- SET COLUMN TFOOT ----------------------- */
 
+.modal-border-right{
+    border-right: 0px solid #e5e5e5;
+}
+
+@media (min-width: 1200px) {
+    .modal-border-right{
+        border-right: 1px solid #e5e5e5;
+    }
+}

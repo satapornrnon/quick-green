@@ -23,12 +23,6 @@ var globalMemberModule;
                     }
                 });
 
-                $(window).on('load', function() {
-                    $('#preloader').fadeOut(500, function() {
-                        $(this).remove();
-                    });
-                });
-
                 // Show or hide the sticky footer button
                 $(window).on('scroll', function (event) {
                     if ($(this).scrollTop() > 600) {
@@ -37,6 +31,12 @@ var globalMemberModule;
                         $('.scroll-top').removeClass('active');
                     }
                 });
+
+                // $(window).on('load', function() {
+                //     $('#preloader').fadeOut(500, function() {
+                //         $(this).remove();
+                //     });
+                // });
 
                 $(".navbar-menu .mobile-nav-toggle").on("click", function(){
                     $("body").toggleClass("mobile-nav-active");
