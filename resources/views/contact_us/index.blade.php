@@ -49,7 +49,7 @@
                                 <h5>ที่อยู่</h5>
                             </div>
                             <div class="detail">
-                                <span>308,310 ถ.ติวานนท์ ตำบลตลาดขวัญ อำเภอเมืองนนทบุรี จังหวัดนนทบุรี 11000</span>
+                                <span>{{ get_settings('company_address') }}</span>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                                 <h5>โทรศัพท์</h5>
                             </div>
                             <div class="detail">
-                                <span>099-999-9999</span>
+                                <span>{{ get_settings('company_telephone') }}</span>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                                 <h5>อีเมล</h5>
                             </div>
                             <div class="detail">
-                                <span>quickgreen@quickgreen.co.th</span>
+                                <span>{{ get_settings('company_email') }}</span>
                             </div>
                         </div>
                     </div>

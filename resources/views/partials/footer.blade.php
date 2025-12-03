@@ -8,8 +8,7 @@
                         <span class="sitename">Quick Green</span>
                     </a>
 
-                    <p class="text">308,310 ถ.ติวานนท์ ตำบลตลาดขวัญ</p>
-                    <p class="text">อำเภอเมืองนนทบุรี จังหวัดนนทบุรี 11000</p>
+                    <p class="text">{{ get_settings('company_address') }}</p>
 
                     <div class="link-wrapper mt-20">
                         <div class="footer-title">
@@ -19,11 +18,11 @@
                         <ul class="footer-contact">
                             <li>
                                 <i class="fas fa-mobile-alt"></i>
-                                : <a class="text-white-subfooter" href="tel:0999999999">099-999-9999</a>
+                                : <a class="text-white-subfooter" href="tel:{{ get_settings('company_telephone') }}">{{ get_settings('company_telephone') }}</a>
                             </li>
                             <li>
                                 <i class="fas fa-envelope"></i>
-                                : <a class="text-white-subfooter" href="mailto:quickgreen@quickgreen.co.th">quickgreen@quickgreen.co.th</a>
+                                : <a class="text-white-subfooter" href="mailto:{{ get_settings('company_email') }}">{{ get_settings('company_email') }}</a>
                             </li>
                         </ul>
                     </div>

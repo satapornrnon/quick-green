@@ -18,8 +18,8 @@ $sidebar_menu[] = array("name" => "ติดต่อเรา", "source" => "co
     <div class="topbar-area">
         <div class="container">
             <div class="contact-info">
-                <a href="mailto:quickgreen@quickgreen.co.th"><i class="fas fa-envelope"></i> quickgreen@quickgreen.co.th</a>
-                <a href="tel:099-999-9999"><i class="fa-solid fa-phone-volume"></i> 099-999-9999</a>
+                <a href="mailto:{{ get_settings('company_email') }}"><i class="fas fa-envelope"></i> {{ get_settings('company_email') }}</a>
+                <a href="tel:{{ get_settings('company_telephone') }}"><i class="fa-solid fa-phone-volume"></i> {{ get_settings('company_telephone') }}</a>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@ $sidebar_menu[] = array("name" => "ติดต่อเรา", "source" => "co
             <div class="mainmenu">
                 <div class="logo">
                     <a href="{{ url('/') }}">
-                        <img src="{{ asset('uploads/system/logo.webp') }}" alt="Quick Green Logo" class="img-fluid">
+                        <img src="{{ asset('uploads/system/'. get_settings('favicon')) }}" alt="Quick Green Logo" class="img-fluid">
                     </a>
                 </div>
 
@@ -77,7 +77,7 @@ $sidebar_menu[] = array("name" => "ติดต่อเรา", "source" => "co
                     <i class="mobile-nav-toggle fa-solid fa-bars"></i>
                 </nav>
                 <div class="contact-info text-end">
-                    <a href="tel:099-999-9999"><i class="fa-solid fa-phone-volume"></i> โทรเลย</a>
+                    <a href="tel:{{ get_settings('company_telephone') }}"><i class="fa-solid fa-phone-volume"></i> โทรเลย</a>
                 </div>
             </div>
         </div>
