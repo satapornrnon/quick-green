@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backoffice;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Logs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -44,6 +45,13 @@ class Login_controller extends Controller
                 'is_logged_in' => true,
             ];
             session($data_session);
+
+            $data_log = array(
+                'subject' => 'เข้าสู่ระบบ', 
+                'detail' => 'เข้าสู่ระบบ ชื่อ-นามสกุล : '. $result->first_name .' '. $result->last_name, 
+                'type' => 'Login', 
+            );
+            Logs::writeLog($data_log['subject'], $data_log['detail'], $data_log['type']);
 
             return response()->json([
                 'success' => true,

@@ -24,8 +24,8 @@
                             <button class="btn btn-sm btn-global-theme" data-theme="dark"><i class="fa-solid fa-moon"></i></button>
                         </div>
                     </div> -->
-                    <a class="dropdown-item" href="#"><i class="fa-solid fa-cog"></i> Settings</a>
-                    <a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    <a class="dropdown-item" href="{{ route('settings') }}"><i class="fa-solid fa-cog"></i> Settings</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                 </div>
             </div>
         </div>
