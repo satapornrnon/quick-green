@@ -12,6 +12,13 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'backoffice/dashboard/get_data',
+        'backoffice/interested/get_data',
+        'backoffice/interested/save',
+        'backoffice/interested/get_detail',
+        'backoffice/product/get_data',
+        'backoffice/roles/get_data',
+        'backoffice/user/get_data',
+        // เพิ่มตามชื่อ route ของคุณ
     ];
 }

@@ -16,9 +16,10 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        // ถ้าไม่ได้ login
-        if (!session('is_logged_in')) {
-            return redirect('/backoffice/login');
+        if (!session()->has('user_id')) {
+            return redirect()->route('login');
         }
+
+        return $next($request);
     }
 }
