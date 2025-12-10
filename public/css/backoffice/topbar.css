@@ -1,11 +1,9 @@
-
-
 .page-layout > .page-main {
     display: flex;
     opacity: 1;
     flex-direction: column;
     flex: 1 1 0%;
-    width: 100vw;
+    width: 60vw;
 }
 
 .page-layout > .page-main .page-topbar {
